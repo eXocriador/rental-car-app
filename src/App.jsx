@@ -2,7 +2,7 @@
 
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import CatalogPage from "./pages/CatalogPage";
+import CatalogPage from "./pages/CatalogPage/CatalogPage";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 
 export default function App() {

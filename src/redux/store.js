@@ -1,10 +1,13 @@
 // src/redux/store.js
 
 import { configureStore } from "@reduxjs/toolkit";
-import placeholderSlice from "./slices/placeholderSlice";
+// Змінюємо імпорт на іменований, додавши дужки
+import { carsReducer } from "./slices/carsSlice";
+import favoritesReducer from "./slices/favoritesSlice";
 
 export const store = configureStore({
   reducer: {
-    placelder: placeholderSlice
+    cars: carsReducer,
+    favorites: favoritesReducer
   }
 });
