@@ -1,0 +1,73 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchAdverts, fetchCarBrands } from "./operations";
+
+const initialState = {
+  items: [],
+  brands: [],
+  isLoading: false,
+  error: null,
+  total: null,
+  currentPage: 1,
+  filters: {}
+};
+
+const carsSlice = createSlice({
+  name: "cars",
+  initialState,
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+    clearCars: (state) => {
+      state.items = [];
+      state.currentPage = 1;
+      state.total = null;
+    },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+    }
+  },
+  extraReducers: (builder) => {
+    builder
+      // Fetch adverts
+      .addCase(fetchAdverts.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchAdverts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+
+        const { data, page } = action.payload;
+
+        if (page === 1) {
+          // Replace items for first page
+          state.items = data.adverts || [];
+        } else {
+          // Append items for subsequent pages
+          state.items = [...state.items, ...(data.adverts || [])];
+        }
+
+        state.total = data.total || 0;
+        state.currentPage = page;
+      })
+      .addCase(fetchAdverts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || "Failed to fetch adverts";
+      })
+
+      // Fetch car brands
+      .addCase(fetchCarBrands.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(fetchCarBrands.fulfilled, (state, action) => {
+        state.brands = action.payload || [];
+      })
+      .addCase(fetchCarBrands.rejected, (state, action) => {
+        state.error = action.payload || "Failed to fetch car brands";
+      });
+  }
+});
+
+export const { clearError, clearCars, setFilters } = carsSlice.actions;
+export default carsSlice.reducer;
