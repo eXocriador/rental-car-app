@@ -14,7 +14,11 @@ export const MainContent = styled.main`
 `;
 
 export const ContentWrapper = styled.div`
-  max-width: 1440px;
+  max-width: 1184px; /* (1440px viewport - 128px padding on each side) */
   margin: 0 auto;
-  padding: 0 128px;
+  padding: 0 16px; /* Basic padding for smaller screens */
+
+  @media (min-width: 1440px) {
+    padding: 0; /* No padding on large screens as max-width handles it */
+  }
 `;

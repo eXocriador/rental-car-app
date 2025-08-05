@@ -10,13 +10,12 @@ import {
 } from "../components/Shared/variables";
 
 const HeroSection = styled.section`
-  background: url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-    center/cover;
+  background: url("https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+    center/cover no-repeat;
   color: white;
-  padding: 120px 0;
-  text-align: left;
+  padding: 184px 0; /* Adjust padding for vertical centering */
+  text-align: center; /* Center align all text */
   position: relative;
-  margin-bottom: ${spacing["3xl"]};
 
   &::before {
     content: "";
@@ -25,61 +24,55 @@ const HeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
 `;
 
 const HeroContent = styled.div`
-  max-width: 1200px;
+  max-width: 1184px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
   position: relative;
   z-index: 2;
+
+  @media (min-width: 1440px) {
+    padding: 0;
+  }
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 60px;
-  font-weight: ${fonts.weights.bold};
-  margin-bottom: 20px;
-  line-height: 72px;
+  font-size: 56px;
+  font-weight: 800; /* Extra Bold */
+  margin-bottom: 24px;
+  line-height: 1.1;
   font-family: ${fonts.primary};
 `;
 
 const HeroDescription = styled.p`
-  font-size: 20px;
-  margin-bottom: 40px;
+  font-size: 18px;
+  margin-bottom: 48px;
   opacity: 0.9;
-  line-height: 32px;
+  line-height: 1.5;
+  max-width: 600px; /* Constrain width */
+  margin-left: auto;
+  margin-right: auto;
   font-family: ${fonts.primary};
 `;
 
 const CTAButton = styled.button`
-  background-color: white;
-  color: ${colors.primary};
+  background-color: #3470ff;
+  color: white;
   font-size: 14px;
   font-weight: 600;
   padding: 12px 50px;
   border: none;
-  border-radius: ${borderRadius.lg};
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: ${shadows.md};
-  font-family: ${fonts.primary};
-  min-width: 156px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${colors.secondary};
-    transform: translateY(-2px);
-    box-shadow: ${shadows.lg};
-  }
-
-  &:active {
-    transform: translateY(0);
+    background-color: #0b44cd;
   }
 `;
 

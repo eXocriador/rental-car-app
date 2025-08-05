@@ -1,22 +1,6 @@
 import styled from "styled-components";
 import { colors, fonts, spacing, borderRadius } from "../Shared/variables";
 
-export const FiltersContainer = styled.div`
-  background: white;
-  padding: ${spacing["2xl"]};
-  border-radius: ${borderRadius.lg};
-  border: 1px solid ${colors.border};
-  margin-bottom: ${spacing["2xl"]};
-  font-family: ${fonts.primary};
-`;
-
-export const FiltersTitle = styled.h2`
-  font-size: ${fonts.sizes["2xl"]};
-  font-weight: ${fonts.weights.semibold};
-  margin-bottom: ${spacing.lg};
-  color: ${colors.text};
-`;
-
 export const FiltersForm = styled.form`
   display: flex;
   gap: 18px;
@@ -42,13 +26,18 @@ export const FilterSelect = styled.select`
   border: none;
   border-radius: 14px;
   font-size: 18px;
-  background: #f7f7fb;
-  transition: border-color 0.2s ease;
-  font-family: ${fonts.primary};
+  font-weight: 500;
+  color: #121417;
+  background-color: #f7f7fb;
   height: 48px;
   cursor: pointer;
-  width: 224px;
-  font-weight: 500;
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* Add custom arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 7.5L10 12.5L15 7.5' stroke='%23121417' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
 
   &:focus {
     outline: none;
@@ -124,22 +113,5 @@ export const SearchButton = styled.button`
   &:disabled {
     background: ${colors.textSecondary};
     cursor: not-allowed;
-  }
-`;
-
-export const ResetButton = styled.button`
-  background: transparent;
-  color: ${colors.textSecondary};
-  font-size: ${fonts.sizes.base};
-  font-weight: ${fonts.weights.medium};
-  padding: ${spacing.md} ${spacing["2xl"]};
-  border: 1px solid ${colors.border};
-  border-radius: ${borderRadius.md};
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: ${colors.secondary};
-    border-color: ${colors.textSecondary};
   }
 `;

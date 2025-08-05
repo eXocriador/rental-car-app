@@ -3,9 +3,10 @@ import { spacing, breakpoints } from "../Shared/variables";
 
 export const CarListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: ${spacing["3xl"]};
+  grid-template-columns: repeat(4, 1fr); /* Changed from 3 to 4 */
+  column-gap: 29px;
+  row-gap: 50px;
+  margin-bottom: 100px;
 
   @media (max-width: ${breakpoints.md}) {
     grid-template-columns: repeat(2, 1fr);
@@ -21,7 +22,8 @@ export const CarListContainer = styled.div`
 export const LoadMoreContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${spacing["2xl"]};
+  margin-top: 0; /* No margin-top as CarListContainer provides margin-bottom */
+  margin-bottom: 100px;
 `;
 
 export const LoadMoreButton = styled.button`

@@ -69,7 +69,13 @@ const CarCard = ({ car }) => {
   return (
     <CardContainer onClick={handleCardClick}>
       <CardImage>
-        <img src={car.img} alt={`${car.brand} ${car.model}`} />
+        <img
+          src={car.img}
+          alt={`${car.brand} ${car.model}`}
+          onError={(e) => {
+            e.target.src = "https://via.placeholder.com/274x268?text=No+Image";
+          }}
+        />
         <FavoriteButton
           onClick={handleFavoriteClick}
           $isFavorite={isFavorite}

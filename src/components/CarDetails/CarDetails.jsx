@@ -9,14 +9,11 @@ import {
   DetailsContainer,
   CarImage,
   CarTitle,
-  CarPrice,
   CarDescription,
-  DetailsGrid,
-  DetailItem,
-  DetailLabel,
-  DetailValue,
+  InfoBlock,
+  InfoItem,
+  SectionTitle,
   RentalConditions,
-  RentalConditionsTitle,
   ConditionsList,
   ConditionItem,
   RentalButton
@@ -28,6 +25,17 @@ const CarDetails = ({ car }) => {
     ? car.rentalConditions
     : car.rentalConditions.split("\n").filter((condition) => condition.trim());
 
+  // Function to parse conditions and wrap numbers in spans
+  const parseCondition = (condition) => {
+    const parts = condition.split(/(\d+)/);
+    return parts.map((part, index) => {
+      if (/^\d+$/.test(part)) {
+        return <span key={index}>{part}</span>;
+      }
+      return part;
+    });
+  };
+
   return (
     <DetailsContainer>
       <CarImage>
@@ -35,64 +43,49 @@ const CarDetails = ({ car }) => {
       </CarImage>
 
       <CarTitle>
-        {car.brand} {car.model}, {car.year}
+        {car.brand} <span>{car.model}</span>, {car.year}
       </CarTitle>
 
-      <CarPrice>{formatPrice(car.rentalPrice)}</CarPrice>
+      <InfoBlock>
+        <InfoItem>{car.address}</InfoItem>
+        <InfoItem>Id: {car.id}</InfoItem>
+        <InfoItem>Year: {car.year}</InfoItem>
+        <InfoItem>Type: {capitalizeFirst(car.type)}</InfoItem>
+      </InfoBlock>
+
+      <InfoBlock>
+        <InfoItem>Fuel Consumption: {car.fuelConsumption}</InfoItem>
+        <InfoItem>Engine Size: {car.engineSize}</InfoItem>
+      </InfoBlock>
 
       <CarDescription>{car.description}</CarDescription>
 
-      <DetailsGrid>
-        <DetailItem>
-          <DetailLabel>Fuel Consumption</DetailLabel>
-          <DetailValue>{car.fuelConsumption}</DetailValue>
-        </DetailItem>
-
-        <DetailItem>
-          <DetailLabel>Engine Size</DetailLabel>
-          <DetailValue>{car.engineSize}</DetailValue>
-        </DetailItem>
-
-        <DetailItem>
-          <DetailLabel>Mileage</DetailLabel>
-          <DetailValue>{formatMileage(car.mileage)}</DetailValue>
-        </DetailItem>
-
-        <DetailItem>
-          <DetailLabel>Type</DetailLabel>
-          <DetailValue>{capitalizeFirst(car.type)}</DetailValue>
-        </DetailItem>
-
-        <DetailItem>
-          <DetailLabel>Rental Company</DetailLabel>
-          <DetailValue>{car.rentalCompany}</DetailValue>
-        </DetailItem>
-
-        <DetailItem>
-          <DetailLabel>Address</DetailLabel>
-          <DetailValue>{car.address}</DetailValue>
-        </DetailItem>
-      </DetailsGrid>
-
       {car.accessories && car.accessories.length > 0 && (
-        <DetailItem>
-          <DetailLabel>Accessories</DetailLabel>
-          <DetailValue>{car.accessories.join(", ")}</DetailValue>
-        </DetailItem>
+        <>
+          <SectionTitle>Accessories and functionalities:</SectionTitle>
+          <InfoBlock>
+            {car.accessories.map((accessory, index) => (
+              <InfoItem key={index}>{accessory}</InfoItem>
+            ))}
+          </InfoBlock>
+        </>
       )}
 
       {car.functionalities && car.functionalities.length > 0 && (
-        <DetailItem>
-          <DetailLabel>Functionalities</DetailLabel>
-          <DetailValue>{car.functionalities.join(", ")}</DetailValue>
-        </DetailItem>
+        <InfoBlock>
+          {car.functionalities.map((functionality, index) => (
+            <InfoItem key={index}>{functionality}</InfoItem>
+          ))}
+        </InfoBlock>
       )}
 
       <RentalConditions>
-        <RentalConditionsTitle>Rental Conditions</RentalConditionsTitle>
+        <SectionTitle>Rental Conditions:</SectionTitle>
         <ConditionsList>
           {rentalConditions.map((condition, index) => (
-            <ConditionItem key={index}>{condition}</ConditionItem>
+            <ConditionItem key={index}>
+              {parseCondition(condition)}
+            </ConditionItem>
           ))}
         </ConditionsList>
       </RentalConditions>

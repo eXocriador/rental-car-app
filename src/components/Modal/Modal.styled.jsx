@@ -12,12 +12,12 @@ export const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${colors.overlay};
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: ${spacing.lg};
+  padding: 20px;
   animation: fadeIn 0.3s ease;
 
   @keyframes fadeIn {
@@ -32,8 +32,9 @@ export const ModalOverlay = styled.div`
 
 export const ModalContent = styled.div`
   background: white;
-  border-radius: ${borderRadius.lg};
-  max-width: 90vw;
+  border-radius: 24px;
+  max-width: 541px;
+  width: 100%;
   max-height: 90vh;
   overflow: auto;
   position: relative;
@@ -53,8 +54,8 @@ export const ModalContent = styled.div`
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: ${spacing.md};
-  right: ${spacing.md};
+  top: 16px;
+  right: 16px;
   background: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: 50%;

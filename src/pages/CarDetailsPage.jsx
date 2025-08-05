@@ -4,50 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { fetchAdverts } from "../redux/cars/operations";
 import CarDetails from "../components/CarDetails/CarDetails";
-import RentalForm from "../components/RentalForm/RentalForm";
+import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
 import styled from "styled-components";
-import { colors, fonts, spacing } from "../components/Shared/variables";
-
-const DetailsContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: ${spacing.lg};
-`;
-
-const BackButton = styled.button`
-  background: ${colors.secondary};
-  color: ${colors.text};
-  font-size: ${fonts.sizes.base};
-  font-weight: ${fonts.weights.medium};
-  padding: ${spacing.md} ${spacing.lg};
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-bottom: ${spacing.xl};
-
-  &:hover {
-    background: ${colors.secondaryHover};
-  }
-`;
-
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: ${spacing["2xl"]};
-  margin-top: ${spacing.xl};
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
 
 const ErrorMessage = styled.div`
   text-align: center;
-  padding: ${spacing["3xl"]} 0;
-  color: ${colors.error};
-  font-size: ${fonts.sizes.lg};
+  padding: 4rem 0;
+  color: #ff0000;
+  font-size: 1.125rem;
 `;
 
 const CarDetailsPage = () => {
@@ -57,7 +22,6 @@ const CarDetailsPage = () => {
   const { items: cars, isLoading } = useSelector((state) => state.cars);
 
   const [car, setCar] = useState(null);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
     // If cars are already loaded, find the car by ID
@@ -84,22 +48,8 @@ const CarDetailsPage = () => {
       });
   }, [id, cars, dispatch]);
 
-  const handleBack = () => {
+  const handleClose = () => {
     navigate(-1);
-  };
-
-  const handleRentalSubmit = (formData) => {
-    // Simulate API call for rental booking
-    console.log("Rental form submitted:", formData);
-
-    // Show success notification
-    toast.success("Car rental booked successfully! We'll contact you soon.");
-    setIsFormSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsFormSubmitted(false);
-    }, 3000);
   };
 
   if (isLoading && !car) {
@@ -108,33 +58,16 @@ const CarDetailsPage = () => {
 
   if (!car) {
     return (
-      <DetailsContainer>
-        <BackButton onClick={handleBack}>← Back to Catalog</BackButton>
-        <ErrorMessage>
-          Car not found. Please check the URL or go back to the catalog.
-        </ErrorMessage>
-      </DetailsContainer>
+      <ErrorMessage>
+        Car not found. Please check the URL or go back to the catalog.
+      </ErrorMessage>
     );
   }
 
   return (
-    <DetailsContainer>
-      <BackButton onClick={handleBack}>← Back to Catalog</BackButton>
-
-      <ContentGrid>
-        <div>
-          <CarDetails car={car} />
-        </div>
-
-        <div>
-          <RentalForm
-            car={car}
-            onSubmit={handleRentalSubmit}
-            isSubmitted={isFormSubmitted}
-          />
-        </div>
-      </ContentGrid>
-    </DetailsContainer>
+    <Modal isOpen={true} onClose={handleClose}>
+      <CarDetails car={car} />
+    </Modal>
   );
 };
 

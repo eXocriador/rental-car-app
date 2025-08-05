@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import { colors, fonts, spacing, borderRadius } from "../Shared/variables";
 
 export const DetailsContainer = styled.div`
-  padding: ${spacing["2xl"]};
-  max-width: 800px;
+  padding: 40px;
+  max-width: 541px; /* As per design */
+  /* Removed background and border-radius as Modal handles these */
 `;
 
 export const CarImage = styled.div`
   width: 100%;
-  height: 300px;
-  border-radius: ${borderRadius.lg};
+  height: 248px; /* Correct height from design */
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: ${spacing["2xl"]};
+  margin-bottom: 14px;
 
   img {
     width: 100%;
@@ -21,90 +21,90 @@ export const CarImage = styled.div`
 `;
 
 export const CarTitle = styled.h2`
-  font-size: ${fonts.sizes["3xl"]};
-  font-weight: ${fonts.weights.bold};
-  color: ${colors.text};
-  margin-bottom: ${spacing.lg};
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.33; /* 24px */
+  color: #121417;
+  margin-bottom: 8px;
+
+  span {
+    color: #3470ff;
+  }
 `;
 
-export const CarPrice = styled.div`
-  font-size: ${fonts.sizes["2xl"]};
-  font-weight: ${fonts.weights.semibold};
-  color: ${colors.primary};
-  margin-bottom: ${spacing["2xl"]};
+export const InfoBlock = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: rgba(18, 20, 23, 0.5);
+  line-height: 1.5;
+`;
+
+export const InfoItem = styled.span`
+  &:not(:last-child)::after {
+    content: "|";
+    margin-left: 6px;
+    color: rgba(18, 20, 23, 0.1);
+  }
 `;
 
 export const CarDescription = styled.p`
-  font-size: ${fonts.sizes.base};
-  line-height: 1.6;
-  color: ${colors.text};
-  margin-bottom: ${spacing["2xl"]};
+  font-size: 14px;
+  line-height: 1.43; /* 20px */
+  color: #121417;
+  margin-top: 14px;
+  margin-bottom: 24px;
 `;
 
-export const DetailsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: ${spacing.lg};
-  margin-bottom: ${spacing["2xl"]};
-`;
-
-export const DetailItem = styled.div`
-  background: ${colors.secondary};
-  padding: ${spacing.lg};
-  border-radius: ${borderRadius.md};
-`;
-
-export const DetailLabel = styled.div`
-  font-size: ${fonts.sizes.sm};
-  font-weight: ${fonts.weights.medium};
-  color: ${colors.textSecondary};
-  margin-bottom: ${spacing.xs};
-`;
-
-export const DetailValue = styled.div`
-  font-size: ${fonts.sizes.base};
-  font-weight: ${fonts.weights.semibold};
-  color: ${colors.text};
+export const SectionTitle = styled.h3`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43; /* 20px */
+  color: #121417;
+  margin-bottom: 8px;
 `;
 
 export const RentalConditions = styled.div`
-  margin-bottom: ${spacing["2xl"]};
+  margin-top: 24px;
 `;
 
-export const RentalConditionsTitle = styled.h3`
-  font-size: ${fonts.sizes["2xl"]};
-  font-weight: ${fonts.weights.semibold};
-  color: ${colors.text};
-  margin-bottom: ${spacing.lg};
+export const ConditionsList = styled.div`
+  /* Change from ul to div */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 `;
 
-export const ConditionsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
+export const ConditionItem = styled.p`
+  /* Change from li to p */
+  padding: 7px 14px;
+  border-radius: 35px;
+  background: #f9f9f9;
+  font-size: 12px;
+  line-height: 1.5; /* 18px */
+  color: #363535;
 
-export const ConditionItem = styled.li`
-  background: ${colors.secondary};
-  padding: ${spacing.md};
-  border-radius: ${borderRadius.md};
-  margin-bottom: ${spacing.sm};
-  font-size: ${fonts.sizes.base};
-  color: ${colors.text};
+  span {
+    font-weight: 600;
+    color: #3470ff;
+  }
 `;
 
 export const RentalButton = styled.a`
+  margin-top: 24px;
   display: inline-block;
-  background: ${colors.primary};
+  background: #3470ff;
   color: white;
-  font-size: ${fonts.sizes.lg};
-  font-weight: ${fonts.weights.semibold};
-  padding: ${spacing.lg} ${spacing["2xl"]};
-  border-radius: ${borderRadius.lg};
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 50px;
+  border-radius: 12px;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background: ${colors.primaryHover};
+    background: #0b44cd;
   }
 `;

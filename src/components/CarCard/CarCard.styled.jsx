@@ -1,11 +1,5 @@
 import styled from "styled-components";
-import {
-  colors,
-  fonts,
-  spacing,
-  shadows,
-  transitions
-} from "../Shared/variables";
+import { fonts, transitions } from "../Shared/variables";
 
 export const CardContainer = styled.div`
   width: 274px;
@@ -25,6 +19,12 @@ export const CardImage = styled.div`
   background-color: #f3f3f2;
   margin-bottom: 14px;
 
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -37,14 +37,7 @@ export const CardImage = styled.div`
       rgba(18, 20, 23, 0.5) 2.5%,
       rgba(18, 20, 23, 0) 41.07%
     );
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: relative;
-    z-index: -1;
+    pointer-events: none;
   }
 `;
 

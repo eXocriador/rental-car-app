@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchCarBrands } from "../../redux/cars/operations";
 import {
-  FiltersContainer,
-  FiltersTitle,
   FiltersForm,
   FilterGroup,
   FilterLabel,
@@ -12,8 +10,7 @@ import {
   MileageGroup,
   MileageInputWrapper,
   FilterInput,
-  SearchButton,
-  ResetButton
+  SearchButton
 } from "./Filters.styled";
 
 const Filters = ({ onSearch, onReset }) => {
@@ -64,72 +61,69 @@ const Filters = ({ onSearch, onReset }) => {
   }
 
   return (
-    <FiltersContainer>
-      <FiltersTitle>Filters</FiltersTitle>
-      <FiltersForm onSubmit={handleSubmit}>
-        <FilterGroup>
-          <FilterLabel htmlFor="make">Car Brand</FilterLabel>
-          <FilterSelect
-            id="make"
-            name="make"
-            value={filters.make}
-            onChange={handleInputChange}
-          >
-            <option value="">All brands</option>
-            {brands.map((brand) => (
-              <option key={brand} value={brand}>
-                {brand}
-              </option>
-            ))}
-          </FilterSelect>
-        </FilterGroup>
+    <FiltersForm onSubmit={handleSubmit}>
+      <FilterGroup style={{ width: "224px" }}>
+        <FilterLabel htmlFor="make">Car Brand</FilterLabel>
+        <FilterSelect
+          id="make"
+          name="make"
+          value={filters.make}
+          onChange={handleInputChange}
+        >
+          <option value="">All brands</option>
+          {brands.map((brand) => (
+            <option key={brand} value={brand}>
+              {brand}
+            </option>
+          ))}
+        </FilterSelect>
+      </FilterGroup>
 
-        <FilterGroup>
-          <FilterLabel htmlFor="rentalPrice">Price/1 hour</FilterLabel>
-          <FilterSelect
-            id="rentalPrice"
-            name="rentalPrice"
-            value={filters.rentalPrice}
-            onChange={handleInputChange}
-          >
-            <option value="">All prices</option>
-            {priceOptions.map((price) => (
-              <option key={price} value={price}>
-                ${price}
-              </option>
-            ))}
-          </FilterSelect>
-        </FilterGroup>
+      <FilterGroup style={{ width: "125px" }}>
+        <FilterLabel htmlFor="rentalPrice">Price/1 hour</FilterLabel>
+        <FilterSelect
+          id="rentalPrice"
+          name="rentalPrice"
+          value={filters.rentalPrice}
+          onChange={handleInputChange}
+        >
+          <option value="">All prices</option>
+          {priceOptions.map((price) => (
+            <option key={price} value={price}>
+              ${price}
+            </option>
+          ))}
+        </FilterSelect>
+      </FilterGroup>
 
-        <FilterGroup>
-          <FilterLabel>Mileage</FilterLabel>
-          <MileageGroup>
-            <MileageInputWrapper>
-              <label>From</label>
-              <FilterInput
-                name="mileageFrom"
-                type="number"
-                value={filters.mileageFrom}
-                onChange={handleInputChange}
-                min="0"
-              />
-            </MileageInputWrapper>
-            <MileageInputWrapper>
-              <label>To</label>
-              <FilterInput
-                name="mileageTo"
-                type="number"
-                value={filters.mileageTo}
-                onChange={handleInputChange}
-                min="0"
-              />
-            </MileageInputWrapper>
-          </MileageGroup>
-        </FilterGroup>
+      <FilterGroup>
+        <FilterLabel>Mileage</FilterLabel>
+        <MileageGroup>
+          <MileageInputWrapper>
+            <label>From</label>
+            <FilterInput
+              name="mileageFrom"
+              type="number"
+              value={filters.mileageFrom}
+              onChange={handleInputChange}
+              min="0"
+            />
+          </MileageInputWrapper>
+          <MileageInputWrapper>
+            <label>To</label>
+            <FilterInput
+              name="mileageTo"
+              type="number"
+              value={filters.mileageTo}
+              onChange={handleInputChange}
+              min="0"
+            />
+          </MileageInputWrapper>
+        </MileageGroup>
+      </FilterGroup>
 
-        <SearchButton type="submit">Search</SearchButton>
-      </FiltersForm>
-    </FiltersContainer>
+      <SearchButton type="submit">Search</SearchButton>
+    </FiltersForm>
   );
 };
 
