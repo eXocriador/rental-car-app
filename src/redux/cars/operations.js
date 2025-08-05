@@ -6,7 +6,7 @@ export const fetchCarBrands = createAsyncThunk(
   "cars/fetchBrands",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get("/adverts/makes");
+      const response = await axiosInstance.get("/brands");
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -16,31 +16,45 @@ export const fetchCarBrands = createAsyncThunk(
   }
 );
 
-// Fetch adverts with pagination and filters
+// Fetch cars with pagination and filters
 export const fetchAdverts = createAsyncThunk(
   "cars/fetchAdverts",
   async ({ page = 1, filters = {} }, { rejectWithValue }) => {
     try {
       const params = {
         page,
-        limit: 12,
-        ...filters
+        limit: 12
       };
 
-      // Remove '$' from rentalPrice if present
-      if (params.rentalPrice && typeof params.rentalPrice === "string") {
-        params.rentalPrice = params.rentalPrice.replace("$", "");
+      // Map our filter names to API parameter names
+      if (filters.make) {
+        params.brand = filters.make;
       }
 
-      const response = await axiosInstance.get("/adverts", { params });
+      if (filters.rentalPrice) {
+        params.rentalPrice = filters.rentalPrice.replace("$", "");
+      }
+
+      if (filters.mileageFrom) {
+        params.minMileage = filters.mileageFrom;
+      }
+
+      if (filters.mileageTo) {
+        params.maxMileage = filters.mileageTo;
+      }
+
+      const response = await axiosInstance.get("/cars", { params });
       return {
-        data: response.data,
+        data: {
+          adverts: response.data.cars || [],
+          total: response.data.totalCars || 0
+        },
         page,
         filters
       };
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch adverts"
+        error.response?.data?.message || "Failed to fetch cars"
       );
     }
   }

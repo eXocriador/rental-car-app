@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
 import HeartIcon from "../../assets/icons/heart-icon.svg";
 import {
@@ -20,8 +22,9 @@ import {
   LearnMoreButton
 } from "./CarCard.styled";
 
-const CarCard = ({ car, onLearnMore }) => {
+const CarCard = ({ car }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const favorites = useSelector((state) => state.favorites.items);
 
   const isFavorite = favorites.some((fav) => fav.id === car.id);
@@ -30,24 +33,26 @@ const CarCard = ({ car, onLearnMore }) => {
     e.stopPropagation();
     if (isFavorite) {
       dispatch(removeFavorite(car.id));
+      toast.success("Removed from favorites");
     } else {
       dispatch(addFavorite(car));
+      toast.success("Added to favorites");
     }
   };
 
   const handleLearnMore = (e) => {
     e.stopPropagation();
-    onLearnMore(car);
+    navigate(`/catalog/${car.id}`);
   };
 
   const handleCardClick = () => {
-    onLearnMore(car);
+    navigate(`/catalog/${car.id}`);
   };
 
   return (
     <CardContainer onClick={handleCardClick}>
       <CardImage>
-        <img src={car.img} alt={`${car.make} ${car.model}`} />
+        <img src={car.img} alt={`${car.brand} ${car.model}`} />
         <FavoriteButton
           onClick={handleFavoriteClick}
           $isFavorite={isFavorite}
@@ -60,7 +65,7 @@ const CarCard = ({ car, onLearnMore }) => {
       <CardContent>
         <CardHeader>
           <CarTitle>
-            {car.make} {car.model}, {car.year}
+            {car.brand} {car.model}, {car.year}
           </CarTitle>
           <CarPrice>{formatPrice(car.rentalPrice)}</CarPrice>
         </CardHeader>
@@ -84,7 +89,7 @@ CarCard.propTypes = {
   car: PropTypes.shape({
     id: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    make: PropTypes.string.isRequired,
+    brand: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
@@ -96,10 +101,12 @@ CarCard.propTypes = {
     rentalPrice: PropTypes.string.isRequired,
     rentalCompany: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    rentalConditions: PropTypes.string.isRequired,
+    rentalConditions: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]).isRequired,
     mileage: PropTypes.number.isRequired
-  }).isRequired,
-  onLearnMore: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default CarCard;

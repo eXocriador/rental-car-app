@@ -10,7 +10,7 @@ import {
   EmptyStateText
 } from "./CarList.styled";
 
-const CarList = ({ cars, onLearnMore, onLoadMore, hasMore, isLoading }) => {
+const CarList = ({ cars, onLoadMore, hasMore, isLoading }) => {
   if (!cars || cars.length === 0) {
     return (
       <EmptyState>
@@ -26,7 +26,7 @@ const CarList = ({ cars, onLearnMore, onLoadMore, hasMore, isLoading }) => {
     <>
       <CarListContainer>
         {cars.map((car) => (
-          <CarCard key={car.id} car={car} onLearnMore={onLearnMore} />
+          <CarCard key={car.id} car={car} />
         ))}
       </CarListContainer>
 
@@ -46,7 +46,7 @@ CarList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       year: PropTypes.number.isRequired,
-      make: PropTypes.string.isRequired,
+      brand: PropTypes.string.isRequired,
       model: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       img: PropTypes.string.isRequired,
@@ -58,11 +58,13 @@ CarList.propTypes = {
       rentalPrice: PropTypes.string.isRequired,
       rentalCompany: PropTypes.string.isRequired,
       address: PropTypes.string.isRequired,
-      rentalConditions: PropTypes.string.isRequired,
+      rentalConditions: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]).isRequired,
       mileage: PropTypes.number.isRequired
     })
   ).isRequired,
-  onLearnMore: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
   hasMore: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired

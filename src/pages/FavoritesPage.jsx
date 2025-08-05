@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import CarList from "../components/CarList/CarList";
-import Modal from "../components/Modal/Modal";
-import CarDetails from "../components/CarDetails/CarDetails";
 import styled from "styled-components";
 import { colors, fonts, spacing } from "../components/Shared/variables";
 
@@ -65,18 +63,6 @@ const BrowseButton = styled.button`
 
 const FavoritesPage = () => {
   const favorites = useSelector((state) => state.favorites.items);
-  const [selectedCar, setSelectedCar] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleLearnMore = (car) => {
-    setSelectedCar(car);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedCar(null);
-  };
 
   const handleBrowseCatalog = () => {
     window.location.href = "/catalog";
@@ -111,15 +97,10 @@ const FavoritesPage = () => {
 
       <CarList
         cars={favorites}
-        onLearnMore={handleLearnMore}
         onLoadMore={() => {}} // No pagination for favorites
         hasMore={false}
         isLoading={false}
       />
-
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedCar && <CarDetails car={selectedCar} />}
-      </Modal>
     </FavoritesContainer>
   );
 };

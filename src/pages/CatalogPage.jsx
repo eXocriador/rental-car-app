@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdverts } from "../redux/cars/operations";
 import { clearCars, setFilters } from "../redux/cars/carsSlice";
 import Filters from "../components/Filters/Filters";
 import CarList from "../components/CarList/CarList";
 import Loader from "../components/Loader/Loader";
-import Modal from "../components/Modal/Modal";
-import CarDetails from "../components/CarDetails/CarDetails";
 import styled from "styled-components";
 import { spacing } from "../components/Shared/variables";
 
@@ -24,8 +22,6 @@ const CatalogPage = () => {
     total,
     currentPage
   } = useSelector((state) => state.cars);
-  const [selectedCar, setSelectedCar] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Load initial data
@@ -52,16 +48,6 @@ const CatalogPage = () => {
     dispatch(fetchAdverts({ page: nextPage }));
   };
 
-  const handleLearnMore = (car) => {
-    setSelectedCar(car);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedCar(null);
-  };
-
   const hasMore = cars.length < total;
 
   if (isLoading && cars.length === 0) {
@@ -77,16 +63,11 @@ const CatalogPage = () => {
       ) : (
         <CarList
           cars={cars}
-          onLearnMore={handleLearnMore}
           onLoadMore={handleLoadMore}
           hasMore={hasMore}
           isLoading={isLoading}
         />
       )}
-
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedCar && <CarDetails car={selectedCar} />}
-      </Modal>
     </CatalogContainer>
   );
 };

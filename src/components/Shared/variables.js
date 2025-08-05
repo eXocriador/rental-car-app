@@ -1,36 +1,44 @@
 export const colors = {
-  primary: "#3470ff",
-  primaryHover: "#0b44cd",
-  secondary: "#f7f7fb",
-  text: "#121417",
-  textSecondary: "#8a8a89",
+  primary: "#3470FF",
+  primaryHover: "#0B44CD",
+  secondary: "#F7F7F7",
+  secondaryHover: "#E8E8F0",
+  text: "#101828",
+  textSecondary: "#8E929A",
   textLight: "#363535",
-  background: "#ffffff",
-  border: "#e5e5e5",
-  error: "#ff0000",
-  success: "#00c851",
-  warning: "#ffbb33",
-  overlay: "rgba(0, 0, 0, 0.5)"
+  background: "#FFFFFF",
+  border: "#DADDE1",
+  error: "#FF0000",
+  success: "#00C851",
+  warning: "#FFBB33",
+  overlay: "rgba(0, 0, 0, 0.5)",
+  gray: "#F2F4F7"
 };
 
 export const fonts = {
   primary:
-    "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+    "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
   sizes: {
-    xs: "0.75rem",
-    sm: "0.875rem",
-    base: "1rem",
-    lg: "1.125rem",
-    xl: "1.25rem",
-    "2xl": "1.5rem",
-    "3xl": "1.875rem",
-    "4xl": "2.25rem"
+    xs: "0.75rem", // 12px
+    sm: "0.875rem", // 14px
+    base: "1rem", // 16px
+    lg: "1.125rem", // 18px
+    xl: "1.25rem", // 20px
+    "2xl": "1.5rem", // 24px
+    "3xl": "1.875rem", // 30px
+    "4xl": "2.25rem", // 36px
+    "5xl": "3.75rem" // 60px
   },
   weights: {
     normal: 400,
     medium: 500,
     semibold: 600,
     bold: 700
+  },
+  lineHeights: {
+    tight: 1.2,
+    normal: 1.4,
+    relaxed: 1.6
   }
 };
 

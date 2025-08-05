@@ -4,28 +4,29 @@ import {
   fonts,
   spacing,
   shadows,
-  borderRadius,
   transitions
 } from "../Shared/variables";
 
 export const CardContainer = styled.div`
   background: white;
-  border-radius: ${borderRadius.lg};
-  box-shadow: ${shadows.md};
+  border-radius: 12px;
+  border: 1px solid ${colors.border};
   overflow: hidden;
   transition: ${transitions.normal};
   cursor: pointer;
+  font-family: ${fonts.primary};
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: ${shadows.lg};
+    border-color: ${colors.primary};
   }
 `;
 
 export const CardImage = styled.div`
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 268px;
   background: ${colors.secondary};
   overflow: hidden;
 
@@ -43,8 +44,8 @@ export const FavoriteButton = styled.button`
   background: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,20 +55,22 @@ export const FavoriteButton = styled.button`
 
   &:hover {
     background: white;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
-  svg {
-    width: 20px;
-    height: 20px;
-    color: ${(props) =>
-      props.$isFavorite ? colors.error : colors.textSecondary};
+  img {
+    width: 24px;
+    height: 24px;
+    filter: ${(props) =>
+      props.$isFavorite
+        ? "brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)"
+        : "none"};
     transition: ${transitions.fast};
   }
 `;
 
 export const CardContent = styled.div`
-  padding: ${spacing.lg};
+  padding: 16px;
 `;
 
 export const CardHeader = styled.div`
@@ -78,33 +81,35 @@ export const CardHeader = styled.div`
 `;
 
 export const CarTitle = styled.h3`
-  font-size: ${fonts.sizes.lg};
+  font-size: 18px;
   font-weight: ${fonts.weights.semibold};
   color: ${colors.text};
   margin: 0;
-  line-height: 1.3;
+  line-height: 20px;
+  font-family: ${fonts.primary};
 `;
 
 export const CarPrice = styled.div`
-  font-size: ${fonts.sizes.lg};
+  font-size: 18px;
   font-weight: ${fonts.weights.semibold};
   color: ${colors.primary};
+  font-family: ${fonts.primary};
 `;
 
 export const CarDetails = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${spacing.sm};
-  margin-bottom: ${spacing.lg};
-  font-size: ${fonts.sizes.sm};
+  gap: 4px;
+  margin-bottom: 16px;
+  font-size: 12px;
   color: ${colors.textSecondary};
-  line-height: 1.4;
+  line-height: 16px;
 `;
 
 export const DetailItem = styled.span`
   &:not(:last-child)::after {
     content: "|";
-    margin-left: ${spacing.sm};
+    margin-left: 8px;
     color: ${colors.border};
   }
 `;
@@ -113,13 +118,18 @@ export const LearnMoreButton = styled.button`
   width: 100%;
   background: ${colors.primary};
   color: white;
-  font-size: ${fonts.sizes.base};
+  font-size: 16px;
   font-weight: ${fonts.weights.medium};
-  padding: ${spacing.md};
+  padding: 12px;
   border: none;
-  border-radius: ${borderRadius.md};
+  border-radius: 12px;
   cursor: pointer;
   transition: ${transitions.fast};
+  font-family: ${fonts.primary};
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background: ${colors.primaryHover};

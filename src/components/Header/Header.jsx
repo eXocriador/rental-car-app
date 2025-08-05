@@ -17,7 +17,6 @@ const Header = () => {
             Home
           </NavItem>
           <NavItem to="/catalog">Catalog</NavItem>
-          <NavItem to="/favorites">Favorites</NavItem>
         </Navigation>
       </HeaderContent>
     </HeaderContainer>

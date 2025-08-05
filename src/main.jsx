@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { ThemeProvider } from "styled-components";
+import { Toaster } from "react-hot-toast";
 import App from "./components/App";
 import { store, persistor } from "./redux/store";
 import { GlobalStyle } from "./components/Shared/GlobalStyle";
@@ -31,6 +32,29 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           <App />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: colors.background,
+                color: colors.text,
+                border: `1px solid ${colors.border}`
+              },
+              success: {
+                style: {
+                  background: colors.success,
+                  color: "white"
+                }
+              },
+              error: {
+                style: {
+                  background: colors.error,
+                  color: "white"
+                }
+              }
+            }}
+          />
         </ThemeProvider>
       </PersistGate>
     </Provider>

@@ -1,18 +1,13 @@
 import styled from "styled-components";
-import {
-  colors,
-  fonts,
-  spacing,
-  shadows,
-  borderRadius
-} from "../Shared/variables";
+import { colors, fonts, spacing, borderRadius } from "../Shared/variables";
 
 export const FiltersContainer = styled.div`
   background: white;
   padding: ${spacing["2xl"]};
   border-radius: ${borderRadius.lg};
-  box-shadow: ${shadows.md};
+  border: 1px solid ${colors.border};
   margin-bottom: ${spacing["2xl"]};
+  font-family: ${fonts.primary};
 `;
 
 export const FiltersTitle = styled.h2`
@@ -24,8 +19,8 @@ export const FiltersTitle = styled.h2`
 
 export const FiltersForm = styled.form`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: ${spacing.lg};
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 20px;
   align-items: end;
 `;
 
@@ -42,12 +37,16 @@ export const FilterLabel = styled.label`
 `;
 
 export const FilterSelect = styled.select`
-  padding: ${spacing.md};
+  padding: 12px 16px;
   border: 1px solid ${colors.border};
-  border-radius: ${borderRadius.md};
-  font-size: ${fonts.sizes.base};
+  border-radius: 12px;
+  font-size: 16px;
   background: white;
   transition: border-color 0.2s ease;
+  font-family: ${fonts.primary};
+  height: 44px;
+  cursor: pointer;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -56,12 +55,15 @@ export const FilterSelect = styled.select`
 `;
 
 export const FilterInput = styled.input`
-  padding: ${spacing.md};
+  padding: 12px 16px;
   border: 1px solid ${colors.border};
-  border-radius: ${borderRadius.md};
-  font-size: ${fonts.sizes.base};
+  border-radius: 12px;
+  font-size: 16px;
   background: white;
   transition: border-color 0.2s ease;
+  font-family: ${fonts.primary};
+  height: 44px;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -76,13 +78,19 @@ export const FilterInput = styled.input`
 export const SearchButton = styled.button`
   background: ${colors.primary};
   color: white;
-  font-size: ${fonts.sizes.base};
+  font-size: 16px;
   font-weight: ${fonts.weights.medium};
-  padding: ${spacing.md} ${spacing["2xl"]};
+  padding: 12px 51px;
   border: none;
-  border-radius: ${borderRadius.md};
+  border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-family: ${fonts.primary};
+  height: 44px;
+  min-width: 156px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background: ${colors.primaryHover};

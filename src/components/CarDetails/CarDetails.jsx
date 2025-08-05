@@ -23,18 +23,19 @@ import {
 } from "./CarDetails.styled";
 
 const CarDetails = ({ car }) => {
-  const rentalConditions = car.rentalConditions
-    .split("\n")
-    .filter((condition) => condition.trim());
+  // Handle rentalConditions as either array or string
+  const rentalConditions = Array.isArray(car.rentalConditions)
+    ? car.rentalConditions
+    : car.rentalConditions.split("\n").filter((condition) => condition.trim());
 
   return (
     <DetailsContainer>
       <CarImage>
-        <img src={car.img} alt={`${car.make} ${car.model}`} />
+        <img src={car.img} alt={`${car.brand} ${car.model}`} />
       </CarImage>
 
       <CarTitle>
-        {car.make} {car.model}, {car.year}
+        {car.brand} {car.model}, {car.year}
       </CarTitle>
 
       <CarPrice>{formatPrice(car.rentalPrice)}</CarPrice>
@@ -105,7 +106,7 @@ CarDetails.propTypes = {
   car: PropTypes.shape({
     id: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    make: PropTypes.string.isRequired,
+    brand: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
@@ -117,7 +118,10 @@ CarDetails.propTypes = {
     rentalPrice: PropTypes.string.isRequired,
     rentalCompany: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    rentalConditions: PropTypes.string.isRequired,
+    rentalConditions: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]).isRequired,
     mileage: PropTypes.number.isRequired
   }).isRequired
 };

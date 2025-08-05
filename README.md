@@ -4,7 +4,13 @@ A modern React-based web application for browsing and managing car rentals. Buil
 
 ## 🚀 Live Demo
 
-[Deploy to Vercel/Netlify and add link here]
+[Deploy your project to Vercel/Netlify and add the link here]
+
+**Note:** To deploy this project:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel or Netlify
+3. Deploy and add the live URL here
 
 ## ✨ Key Features
 
@@ -76,9 +82,13 @@ src/
 
 The application integrates with the Car Rental API:
 
-- Base URL: `https://car-rental-api.goit.global`
-- Endpoints: `/adverts`, `/adverts/makes`
-- Features: Pagination, filtering, brand fetching
+- **Base URL**: `https://car-rental-api.goit.global`
+- **Endpoints**:
+  - `GET /cars` - Get list of cars with pagination and filtering
+  - `GET /cars/{id}` - Get specific car by ID
+  - `GET /brands` - Get list of car brands
+- **Features**: Pagination, filtering by brand, price, and mileage
+- **Parameters**: `brand`, `rentalPrice`, `minMileage`, `maxMileage`, `limit`, `page`
 
 ## 🤝 Contributing
 
