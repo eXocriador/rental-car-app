@@ -1,0 +1,54 @@
+.detailsContainer {
+  max-width: 1184px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.carDetailsWrapper {
+  margin-top: 40px;
+}
+
+.rentButton {
+  background: #3470ff;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(52, 112, 255, 0.3);
+  margin-top: 32px;
+}
+
+.rentButton:hover {
+  background: #0b44cd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(52, 112, 255, 0.4);
+}
+
+.rentButton:active {
+  transform: translateY(0);
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 4rem 0;
+  color: #ff0000;
+  font-size: 1.125rem;
+}
+
+@media (min-width: 1440px) {
+  .detailsContainer {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .detailsContainer {
+    padding: 0 16px;
+  }
+}

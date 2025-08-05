@@ -1,0 +1,85 @@
+.carListContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  margin-bottom: 80px;
+  justify-items: center;
+}
+
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+
+.loadMoreButton {
+  background: #3470ff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(52, 112, 255, 0.3);
+}
+
+.loadMoreButton:hover {
+  background: #0b44cd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(52, 112, 255, 0.4);
+}
+
+.loadMoreButton:active {
+  transform: translateY(0);
+}
+
+.loadMoreButton:disabled {
+  background: #8a8a89;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 0;
+  color: #8a8a89;
+}
+
+.emptyStateTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #121417;
+}
+
+.emptyStateText {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .carListContainer {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carListContainer {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carListContainer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto 80px auto;
+  }
+}

@@ -8,18 +8,7 @@ import {
   removeFavorite
 } from "../../redux/favorites/favoritesSlice";
 import { formatPrice, capitalizeFirst } from "../../utils/formatters";
-import {
-  CardContainer,
-  CardImage,
-  FavoriteButton,
-  CardContent,
-  CardHeader,
-  CarTitle,
-  CarPrice,
-  CarDetails,
-  DetailItem,
-  LearnMoreButton
-} from "./CarCard.styled";
+import styles from "./CarCard.module.css";
 
 // Heart icon as React component
 const HeartIcon = ({ isFavorite }) => (
@@ -67,8 +56,8 @@ const CarCard = ({ car }) => {
   };
 
   return (
-    <CardContainer onClick={handleCardClick}>
-      <CardImage>
+    <div className={styles.cardContainer} onClick={handleCardClick}>
+      <div className={styles.cardImage}>
         <img
           src={car.img}
           alt={`${car.brand} ${car.model}`}
@@ -76,36 +65,42 @@ const CarCard = ({ car }) => {
             e.target.src = "https://via.placeholder.com/274x268?text=No+Image";
           }}
         />
-        <FavoriteButton
+        <button
+          className={`${styles.favoriteButton} ${
+            isFavorite ? styles.isFavorite : ""
+          }`}
           onClick={handleFavoriteClick}
-          $isFavorite={isFavorite}
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
           <HeartIcon isFavorite={isFavorite} />
-        </FavoriteButton>
-      </CardImage>
+        </button>
+      </div>
 
-      <CardContent>
-        <CardHeader>
-          <CarTitle>
+      <div className={styles.cardContent}>
+        <div className={styles.cardHeader}>
+          <h3 className={styles.carTitle}>
             {car.brand} <span>{car.model}</span>, {car.year}
-          </CarTitle>
-          <CarPrice>{formatPrice(car.rentalPrice)}</CarPrice>
-        </CardHeader>
+          </h3>
+          <div className={styles.carPrice}>{formatPrice(car.rentalPrice)}</div>
+        </div>
 
-        <CarDetails>
-          <DetailItem>{car.address.split(",")[1]}</DetailItem>
-          <DetailItem>{car.address.split(",")[2]}</DetailItem>
-          <DetailItem>{car.rentalCompany}</DetailItem>
-          <DetailItem>{capitalizeFirst(car.type)}</DetailItem>
-          <DetailItem>{car.model}</DetailItem>
-          <DetailItem>{car.mileage.toLocaleString("en-US")}</DetailItem>
-          <DetailItem>{car.functionalities[0]}</DetailItem>
-        </CarDetails>
+        <div className={styles.carDetails}>
+          <span className={styles.detailItem}>{car.address.split(",")[1]}</span>
+          <span className={styles.detailItem}>{car.address.split(",")[2]}</span>
+          <span className={styles.detailItem}>{car.rentalCompany}</span>
+          <span className={styles.detailItem}>{capitalizeFirst(car.type)}</span>
+          <span className={styles.detailItem}>{car.model}</span>
+          <span className={styles.detailItem}>
+            {car.mileage.toLocaleString("en-US")}
+          </span>
+          <span className={styles.detailItem}>{car.functionalities[0]}</span>
+        </div>
 
-        <LearnMoreButton onClick={handleLearnMore}>Learn More</LearnMoreButton>
-      </CardContent>
-    </CardContainer>
+        <button className={styles.learnMoreButton} onClick={handleLearnMore}>
+          Learn More
+        </button>
+      </div>
+    </div>
   );
 };
 

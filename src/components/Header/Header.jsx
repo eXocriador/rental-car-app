@@ -1,30 +1,35 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import {
-  HeaderContainer,
-  HeaderContent,
-  Logo,
-  Navigation,
-  NavItem
-} from "./Header.styled";
+import styles from "./Header.module.css";
 
 const Header = () => {
   return (
-    <HeaderContainer>
-      <HeaderContent>
-        <Logo as={Link} to="/">
+    <header className={styles.headerContainer}>
+      <div className={styles.headerContent}>
+        <Link to="/" className={styles.logo}>
           RentalCar
-        </Logo>
-        <Navigation>
-          <NavItem as={NavLink} to="/" end>
+        </Link>
+        <nav className={styles.navigation}>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
+            }
+          >
             Home
-          </NavItem>
-          <NavItem as={NavLink} to="/catalog">
+          </NavLink>
+          <NavLink
+            to="/catalog"
+            className={({ isActive }) =>
+              isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
+            }
+          >
             Catalog
-          </NavItem>
-        </Navigation>
-      </HeaderContent>
-    </HeaderContainer>
+          </NavLink>
+        </nav>
+      </div>
+    </header>
   );
 };
 

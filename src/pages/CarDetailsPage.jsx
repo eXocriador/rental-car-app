@@ -8,58 +8,7 @@ import CarDetails from "../components/CarDetails/CarDetails";
 import RentalForm from "../components/RentalForm/RentalForm";
 import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
-import styled from "styled-components";
-
-const DetailsContainer = styled.div`
-  max-width: 1184px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  @media (min-width: 1440px) {
-    padding: 0;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0 16px;
-  }
-`;
-
-const CarDetailsWrapper = styled.div`
-  margin-top: 40px;
-`;
-
-const RentButton = styled.button`
-  background: #3470ff;
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 16px 32px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(52, 112, 255, 0.3);
-  margin-top: 32px;
-
-  &:hover {
-    background: #0b44cd;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(52, 112, 255, 0.4);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
-
-const ErrorMessage = styled.div`
-  text-align: center;
-  padding: 4rem 0;
-  color: #ff0000;
-  font-size: 1.125rem;
-`;
+import styles from "./CarDetailsPage.module.css";
 
 const CarDetailsPage = () => {
   const { id } = useParams();
@@ -131,18 +80,20 @@ const CarDetailsPage = () => {
 
   if (!car) {
     return (
-      <ErrorMessage>
+      <div className={styles.errorMessage}>
         Car not found. Please check the URL or go back to the catalog.
-      </ErrorMessage>
+      </div>
     );
   }
 
   return (
-    <DetailsContainer>
-      <CarDetailsWrapper>
+    <div className={styles.detailsContainer}>
+      <div className={styles.carDetailsWrapper}>
         <CarDetails car={car} />
-        <RentButton onClick={handleOpenModal}>Rent This Car</RentButton>
-      </CarDetailsWrapper>
+        <button className={styles.rentButton} onClick={handleOpenModal}>
+          Rent This Car
+        </button>
+      </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <RentalForm
@@ -151,7 +102,7 @@ const CarDetailsPage = () => {
           isSubmitted={isFormSubmitted}
         />
       </Modal>
-    </DetailsContainer>
+    </div>
   );
 };
 

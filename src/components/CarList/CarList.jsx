@@ -1,41 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CarCard from "../CarCard/CarCard";
-import {
-  CarListContainer,
-  LoadMoreContainer,
-  LoadMoreButton,
-  EmptyState,
-  EmptyStateTitle,
-  EmptyStateText
-} from "./CarList.styled";
+import styles from "./CarList.module.css";
 
 const CarList = ({ cars, onLoadMore, hasMore, isLoading }) => {
   if (!cars || cars.length === 0) {
     return (
-      <EmptyState>
-        <EmptyStateTitle>No cars found</EmptyStateTitle>
-        <EmptyStateText>
+      <div className={styles.emptyState}>
+        <h3 className={styles.emptyStateTitle}>No cars found</h3>
+        <p className={styles.emptyStateText}>
           Try adjusting your filters or search criteria to find more vehicles.
-        </EmptyStateText>
-      </EmptyState>
+        </p>
+      </div>
     );
   }
 
   return (
     <>
-      <CarListContainer>
+      <div className={styles.carListContainer}>
         {cars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
-      </CarListContainer>
+      </div>
 
       {hasMore && (
-        <LoadMoreContainer>
-          <LoadMoreButton onClick={onLoadMore} disabled={isLoading}>
+        <div className={styles.loadMoreContainer}>
+          <button
+            className={styles.loadMoreButton}
+            onClick={onLoadMore}
+            disabled={isLoading}
+          >
             {isLoading ? "Loading..." : "Load More"}
-          </LoadMoreButton>
-        </LoadMoreContainer>
+          </button>
+        </div>
       )}
     </>
   );

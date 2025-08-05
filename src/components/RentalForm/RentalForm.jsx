@@ -2,20 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 import { formatPrice } from "../../utils/formatters";
-import {
-  FormContainer,
-  FormTitle,
-  Form,
-  FormGroup,
-  FormLabel,
-  FormInput,
-  FormSelect,
-  FormTextarea,
-  SubmitButton,
-  SuccessMessage,
-  CarInfo,
-  CarPrice
-} from "./RentalForm.styled";
+import styles from "./RentalForm.module.css";
 
 const RentalForm = ({ car, onSubmit, isSubmitted }) => {
   const [formData, setFormData] = useState({
@@ -104,125 +91,150 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
 
   if (isSubmitted) {
     return (
-      <FormContainer>
-        <SuccessMessage>
+      <div className={styles.formContainer}>
+        <div className={styles.successMessage}>
           <h3>Booking Submitted Successfully!</h3>
           <p>
             Thank you for your booking. We'll contact you shortly to confirm
             your reservation.
           </p>
-        </SuccessMessage>
-      </FormContainer>
+        </div>
+      </div>
     );
   }
 
   return (
-    <FormContainer>
-      <FormTitle>Book This Car</FormTitle>
+    <div className={styles.formContainer}>
+      <h2 className={styles.formTitle}>Book This Car</h2>
 
-      <CarInfo>
+      <div className={styles.carInfo}>
         <h4>
           {car.brand} {car.model}, {car.year}
         </h4>
-        <CarPrice>{formatPrice(car.rentalPrice)}</CarPrice>
-      </CarInfo>
+        <div className={styles.carPrice}>{formatPrice(car.rentalPrice)}</div>
+      </div>
 
-      <Form onSubmit={handleSubmit}>
-        <FormGroup>
-          <FormLabel htmlFor="name">Full Name *</FormLabel>
-          <FormInput
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="name">
+            Full Name *
+          </label>
+          <input
+            className={`${styles.formInput} ${errors.name ? styles.error : ""}`}
             id="name"
             name="name"
             type="text"
             value={formData.name}
             onChange={handleInputChange}
-            error={errors.name}
             placeholder="Enter your full name"
           />
           {errors.name && <span className="error">{errors.name}</span>}
-        </FormGroup>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="email">Email *</FormLabel>
-          <FormInput
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="email">
+            Email *
+          </label>
+          <input
+            className={`${styles.formInput} ${
+              errors.email ? styles.error : ""
+            }`}
             id="email"
             name="email"
             type="email"
             value={formData.email}
             onChange={handleInputChange}
-            error={errors.email}
             placeholder="Enter your email"
           />
           {errors.email && <span className="error">{errors.email}</span>}
-        </FormGroup>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="phone">Phone Number *</FormLabel>
-          <FormInput
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="phone">
+            Phone Number *
+          </label>
+          <input
+            className={`${styles.formInput} ${
+              errors.phone ? styles.error : ""
+            }`}
             id="phone"
             name="phone"
             type="tel"
             value={formData.phone}
             onChange={handleInputChange}
-            error={errors.phone}
             placeholder="Enter your phone number"
           />
           {errors.phone && <span className="error">{errors.phone}</span>}
-        </FormGroup>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="startDate">Start Date *</FormLabel>
-          <FormInput
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="startDate">
+            Start Date *
+          </label>
+          <input
+            className={`${styles.formInput} ${
+              errors.startDate ? styles.error : ""
+            }`}
             id="startDate"
             name="startDate"
             type="date"
             value={formData.startDate}
             onChange={handleInputChange}
-            error={errors.startDate}
             min={new Date().toISOString().split("T")[0]}
           />
           {errors.startDate && (
             <span className="error">{errors.startDate}</span>
           )}
-        </FormGroup>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="endDate">End Date *</FormLabel>
-          <FormInput
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="endDate">
+            End Date *
+          </label>
+          <input
+            className={`${styles.formInput} ${
+              errors.endDate ? styles.error : ""
+            }`}
             id="endDate"
             name="endDate"
             type="date"
             value={formData.endDate}
             onChange={handleInputChange}
-            error={errors.endDate}
             min={formData.startDate || new Date().toISOString().split("T")[0]}
           />
           {errors.endDate && <span className="error">{errors.endDate}</span>}
-        </FormGroup>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="pickupLocation">Pickup Location *</FormLabel>
-          <FormSelect
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="pickupLocation">
+            Pickup Location *
+          </label>
+          <select
+            className={`${styles.formSelect} ${
+              errors.pickupLocation ? styles.error : ""
+            }`}
             id="pickupLocation"
             name="pickupLocation"
             value={formData.pickupLocation}
             onChange={handleInputChange}
-            error={errors.pickupLocation}
           >
             <option value="">Select pickup location</option>
             <option value="airport">Airport</option>
             <option value="downtown">Downtown Office</option>
             <option value="hotel">Hotel Pickup</option>
             <option value="other">Other Location</option>
-          </FormSelect>
+          </select>
           {errors.pickupLocation && (
             <span className="error">{errors.pickupLocation}</span>
           )}
-        </FormGroup>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="dropoffLocation">Dropoff Location</FormLabel>
-          <FormSelect
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="dropoffLocation">
+            Dropoff Location
+          </label>
+          <select
+            className={styles.formSelect}
             id="dropoffLocation"
             name="dropoffLocation"
             value={formData.dropoffLocation}
@@ -233,12 +245,15 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
             <option value="downtown">Downtown Office</option>
             <option value="hotel">Hotel Dropoff</option>
             <option value="other">Other Location</option>
-          </FormSelect>
-        </FormGroup>
+          </select>
+        </div>
 
-        <FormGroup>
-          <FormLabel htmlFor="additionalNotes">Additional Notes</FormLabel>
-          <FormTextarea
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="additionalNotes">
+            Additional Notes
+          </label>
+          <textarea
+            className={styles.formTextarea}
             id="additionalNotes"
             name="additionalNotes"
             value={formData.additionalNotes}
@@ -246,11 +261,13 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
             placeholder="Any special requirements or notes..."
             rows="4"
           />
-        </FormGroup>
+        </div>
 
-        <SubmitButton type="submit">Book Now</SubmitButton>
-      </Form>
-    </FormContainer>
+        <button className={styles.submitButton} type="submit">
+          Book Now
+        </button>
+      </form>
+    </div>
   );
 };
 

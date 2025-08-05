@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "../../assets/icons/close-icon.svg";
-import { ModalOverlay, ModalContent, CloseButton } from "./Modal.styled";
+import styles from "./Modal.module.css";
 
 const Modal = ({ isOpen, onClose, children }) => {
   useEffect(() => {
@@ -31,14 +31,18 @@ const Modal = ({ isOpen, onClose, children }) => {
   };
 
   return (
-    <ModalOverlay onClick={handleOverlayClick}>
-      <ModalContent>
-        <CloseButton onClick={onClose} aria-label="Close modal">
+    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+      <div className={styles.modalContent}>
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          aria-label="Close modal"
+        >
           <img src={CloseIcon} alt="close" />
-        </CloseButton>
+        </button>
         {children}
-      </ModalContent>
-    </ModalOverlay>
+      </div>
+    </div>
   );
 };
 

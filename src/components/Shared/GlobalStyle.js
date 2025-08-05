@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
 import "modern-normalize";
 
-export const GlobalStyle = createGlobalStyle`
+// Global styles as regular CSS
+const globalStyles = `
   /* Modern Normalize is imported above */
 
   /* Additional resets and base styles */
@@ -101,3 +101,13 @@ export const GlobalStyle = createGlobalStyle`
     background: #a8a8a8;
   }
 `;
+
+// Function to inject global styles
+export const injectGlobalStyles = () => {
+  const styleElement = document.createElement("style");
+  styleElement.textContent = globalStyles;
+  document.head.appendChild(styleElement);
+};
+
+// Export the styles string for manual injection if needed
+export const GlobalStyle = globalStyles;

@@ -3,20 +3,20 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
-import { LayoutContainer, MainContent } from "./Layout.styled";
+import styles from "./Layout.module.css";
 
 const Layout = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
   return (
-    <LayoutContainer>
+    <div className={styles.layoutContainer}>
       <Header />
-      <MainContent>
+      <main className={styles.mainContent}>
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-      </MainContent>
+      </main>
       <Toaster
         position="top-right"
         toastOptions={{
@@ -27,7 +27,7 @@ const Layout = () => {
           }
         }}
       />
-    </LayoutContainer>
+    </div>
   );
 };
 

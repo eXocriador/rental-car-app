@@ -5,18 +5,7 @@ import {
   formatPrice,
   capitalizeFirst
 } from "../../utils/formatters";
-import {
-  DetailsContainer,
-  CarImage,
-  CarTitle,
-  CarDescription,
-  InfoBlock,
-  InfoItem,
-  SectionTitle,
-  RentalConditions,
-  ConditionsList,
-  ConditionItem
-} from "./CarDetails.styled";
+import styles from "./CarDetails.module.css";
 
 const CarDetails = ({ car }) => {
   // Handle rentalConditions as either array or string
@@ -36,59 +25,69 @@ const CarDetails = ({ car }) => {
   };
 
   return (
-    <DetailsContainer>
-      <CarImage>
+    <div className={styles.detailsContainer}>
+      <div className={styles.carImage}>
         <img src={car.img} alt={`${car.brand} ${car.model}`} />
-      </CarImage>
+      </div>
 
-      <CarTitle>
+      <h2 className={styles.carTitle}>
         {car.brand} <span>{car.model}</span>, {car.year}
-      </CarTitle>
+      </h2>
 
-      <InfoBlock>
-        <InfoItem>{car.address.split(",")[1]}</InfoItem>
-        <InfoItem>Id: {car.id}</InfoItem>
-        <InfoItem>Year: {car.year}</InfoItem>
-        <InfoItem>Type: {capitalizeFirst(car.type)}</InfoItem>
-      </InfoBlock>
+      <div className={styles.infoBlock}>
+        <span className={styles.infoItem}>{car.address.split(",")[1]}</span>
+        <span className={styles.infoItem}>Id: {car.id}</span>
+        <span className={styles.infoItem}>Year: {car.year}</span>
+        <span className={styles.infoItem}>
+          Type: {capitalizeFirst(car.type)}
+        </span>
+      </div>
 
-      <InfoBlock>
-        <InfoItem>Fuel Consumption: {car.fuelConsumption}</InfoItem>
-        <InfoItem>Engine Size: {car.engineSize}</InfoItem>
-      </InfoBlock>
+      <div className={styles.infoBlock}>
+        <span className={styles.infoItem}>
+          Fuel Consumption: {car.fuelConsumption}
+        </span>
+        <span className={styles.infoItem}>Engine Size: {car.engineSize}</span>
+      </div>
 
-      <CarDescription>{car.description}</CarDescription>
+      <p className={styles.carDescription}>{car.description}</p>
 
       {car.accessories && car.accessories.length > 0 && (
         <>
-          <SectionTitle>Accessories and functionalities:</SectionTitle>
-          <InfoBlock>
+          <h3 className={styles.sectionTitle}>
+            Accessories and functionalities:
+          </h3>
+          <div className={styles.infoBlock}>
             {car.accessories.map((accessory, index) => (
-              <InfoItem key={index}>{accessory}</InfoItem>
+              <span className={styles.infoItem} key={index}>
+                {accessory}
+              </span>
             ))}
-          </InfoBlock>
+          </div>
         </>
       )}
 
       {car.functionalities && car.functionalities.length > 0 && (
-        <InfoBlock>
+        <div className={styles.infoBlock}>
           {car.functionalities.map((functionality, index) => (
-            <InfoItem key={index}>{functionality}</InfoItem>
+            <span className={styles.infoItem} key={index}>
+              {functionality}
+            </span>
           ))}
-        </InfoBlock>
+        </div>
       )}
 
-      <RentalConditions>
-        <SectionTitle>Rental Conditions:</SectionTitle>
-        <ConditionsList>
+      <div className={styles.rentalConditions}>
+        <h3 className={styles.sectionTitle}>Rental Conditions:</h3>
+        <div className={styles.conditionsList}>
           {rentalConditions.map((condition, index) => (
-            <ConditionItem key={index}>
+            <p className={styles.conditionItem} key={index}>
               {parseCondition(condition)}
-            </ConditionItem>
+            </p>
           ))}
-        </ConditionsList>
-      </RentalConditions>
-    </DetailsContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 

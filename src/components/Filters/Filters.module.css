@@ -1,7 +1,4 @@
-import styled from "styled-components";
-import { colors, fonts, spacing, borderRadius } from "../Shared/variables";
-
-export const FiltersForm = styled.form`
+.filtersForm {
   display: flex;
   gap: 20px;
   align-items: flex-end;
@@ -12,28 +9,22 @@ export const FiltersForm = styled.form`
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
+}
 
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-  }
-`;
-
-export const FilterGroup = styled.div`
+.filterGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
+}
 
-export const FilterLabel = styled.label`
+.filterLabel {
   font-size: 14px;
   font-weight: 600;
   color: #121417;
   margin-bottom: 4px;
-`;
+}
 
-export const FilterSelect = styled.select`
+.filterSelect {
   padding: 14px 18px;
   border: 2px solid #e9ecef;
   border-radius: 12px;
@@ -46,48 +37,46 @@ export const FilterSelect = styled.select`
   transition: all 0.3s ease;
   -webkit-appearance: none;
   appearance: none;
-
-  /* Add custom arrow */
   background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 7.5L10 12.5L15 7.5' stroke='%23121417' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat;
   background-position: right 18px center;
+}
 
-  &:focus {
-    outline: none;
-    border-color: #3470ff;
-    box-shadow: 0 0 0 3px rgba(52, 112, 255, 0.1);
-  }
+.filterSelect:focus {
+  outline: none;
+  border-color: #3470ff;
+  box-shadow: 0 0 0 3px rgba(52, 112, 255, 0.1);
+}
 
-  &:hover {
-    border-color: #3470ff;
-  }
-`;
+.filterSelect:hover {
+  border-color: #3470ff;
+}
 
-export const MileageGroup = styled.div`
+.mileageGroup {
   display: flex;
   gap: 0;
-`;
+}
 
-export const MileageInputWrapper = styled.div`
+.mileageInputWrapper {
   position: relative;
+}
 
-  input {
-    position: relative;
-    z-index: 1;
-  }
+.mileageInputWrapper input {
+  position: relative;
+  z-index: 1;
+}
 
-  label {
-    position: absolute;
-    left: 24px;
-    top: 14px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #121417;
-    z-index: 0;
-  }
-`;
+.mileageInputWrapper label {
+  position: absolute;
+  left: 24px;
+  top: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417;
+  z-index: 0;
+}
 
-export const FilterInput = styled.input`
+.filterInput {
   padding: 14px 24px 14px 70px;
   width: 160px;
   height: 48px;
@@ -96,33 +85,34 @@ export const FilterInput = styled.input`
   font-size: 16px;
   font-weight: 500;
   transition: all 0.3s ease;
+}
 
-  &:first-of-type {
-    border-radius: 12px 0 0 12px;
-    border-right: 1px solid #e9ecef;
-  }
-  &:last-of-type {
-    border-radius: 0 12px 12px 0;
-  }
+.filterInput:first-of-type {
+  border-radius: 12px 0 0 12px;
+  border-right: 1px solid #e9ecef;
+}
 
-  &:focus {
-    outline: none;
-    border-color: #3470ff;
-    box-shadow: 0 0 0 3px rgba(52, 112, 255, 0.1);
-  }
+.filterInput:last-of-type {
+  border-radius: 0 12px 12px 0;
+}
 
-  &:hover {
-    border-color: #3470ff;
-  }
-`;
+.filterInput:focus {
+  outline: none;
+  border-color: #3470ff;
+  box-shadow: 0 0 0 3px rgba(52, 112, 255, 0.1);
+}
 
-export const ButtonGroup = styled.div`
+.filterInput:hover {
+  border-color: #3470ff;
+}
+
+.buttonGroup {
   display: flex;
   gap: 12px;
   align-items: center;
-`;
+}
 
-export const SearchButton = styled.button`
+.searchButton {
   background: #3470ff;
   color: white;
   font-size: 16px;
@@ -132,7 +122,8 @@ export const SearchButton = styled.button`
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: ${fonts.primary};
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", sans-serif;
   height: 48px;
   min-width: 140px;
   display: flex;
@@ -141,26 +132,26 @@ export const SearchButton = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 12px rgba(52, 112, 255, 0.3);
+}
 
-  &:hover {
-    background: #0b44cd;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(52, 112, 255, 0.4);
-  }
+.searchButton:hover {
+  background: #0b44cd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(52, 112, 255, 0.4);
+}
 
-  &:active {
-    transform: translateY(0);
-  }
+.searchButton:active {
+  transform: translateY(0);
+}
 
-  &:disabled {
-    background: #8a8a89;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
-`;
+.searchButton:disabled {
+  background: #8a8a89;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
-export const ResetButton = styled.button`
+.resetButton {
   background: transparent;
   color: #6c757d;
   font-size: 16px;
@@ -170,22 +161,31 @@ export const ResetButton = styled.button`
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: ${fonts.primary};
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", sans-serif;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
 
-  &:hover {
-    background: #f8f9fa;
-    border-color: #6c757d;
-    color: #495057;
-    transform: translateY(-2px);
-  }
+.resetButton:hover {
+  background: #f8f9fa;
+  border-color: #6c757d;
+  color: #495057;
+  transform: translateY(-2px);
+}
 
-  &:active {
-    transform: translateY(0);
+.resetButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .filtersForm {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
   }
-`;
+}

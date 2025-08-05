@@ -1,65 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CarList from "../components/CarList/CarList";
-import styled from "styled-components";
-import { colors, fonts, spacing } from "../components/Shared/variables";
-
-const FavoritesContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${spacing.lg};
-`;
-
-const FavoritesHeader = styled.div`
-  text-align: center;
-  margin-bottom: ${spacing["3xl"]};
-`;
-
-const FavoritesTitle = styled.h1`
-  font-size: ${fonts.sizes["4xl"]};
-  font-weight: ${fonts.weights.bold};
-  color: ${colors.text};
-  margin-bottom: ${spacing.md};
-`;
-
-const FavoritesSubtitle = styled.p`
-  font-size: ${fonts.sizes.lg};
-  color: ${colors.textSecondary};
-`;
-
-const EmptyFavorites = styled.div`
-  text-align: center;
-  padding: ${spacing["3xl"]} 0;
-`;
-
-const EmptyTitle = styled.h2`
-  font-size: ${fonts.sizes["3xl"]};
-  font-weight: ${fonts.weights.semibold};
-  color: ${colors.text};
-  margin-bottom: ${spacing.lg};
-`;
-
-const EmptyText = styled.p`
-  font-size: ${fonts.sizes.lg};
-  color: ${colors.textSecondary};
-  margin-bottom: ${spacing["2xl"]};
-`;
-
-const BrowseButton = styled.button`
-  background: ${colors.primary};
-  color: white;
-  font-size: ${fonts.sizes.base};
-  font-weight: ${fonts.weights.medium};
-  padding: ${spacing.md} ${spacing["2xl"]};
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background: ${colors.primaryHover};
-  }
-`;
+import styles from "./FavoritesPage.module.css";
 
 const FavoritesPage = () => {
   const favorites = useSelector((state) => state.favorites.items);
@@ -70,30 +12,30 @@ const FavoritesPage = () => {
 
   if (favorites.length === 0) {
     return (
-      <FavoritesContainer>
-        <EmptyFavorites>
-          <EmptyTitle>No favorite cars yet</EmptyTitle>
-          <EmptyText>
+      <div className={styles.favoritesContainer}>
+        <div className={styles.emptyFavorites}>
+          <h2 className={styles.emptyTitle}>No favorite cars yet</h2>
+          <p className={styles.emptyText}>
             Start browsing our catalog and add cars to your favorites to see
             them here.
-          </EmptyText>
-          <BrowseButton onClick={handleBrowseCatalog}>
+          </p>
+          <button className={styles.browseButton} onClick={handleBrowseCatalog}>
             Browse Catalog
-          </BrowseButton>
-        </EmptyFavorites>
-      </FavoritesContainer>
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <FavoritesContainer>
-      <FavoritesHeader>
-        <FavoritesTitle>Your Favorite Cars</FavoritesTitle>
-        <FavoritesSubtitle>
+    <div className={styles.favoritesContainer}>
+      <div className={styles.favoritesHeader}>
+        <h1 className={styles.favoritesTitle}>Your Favorite Cars</h1>
+        <p className={styles.favoritesSubtitle}>
           You have {favorites.length} car{favorites.length !== 1 ? "s" : ""} in
           your favorites
-        </FavoritesSubtitle>
-      </FavoritesHeader>
+        </p>
+      </div>
 
       <CarList
         cars={favorites}
@@ -101,7 +43,7 @@ const FavoritesPage = () => {
         hasMore={false}
         isLoading={false}
       />
-    </FavoritesContainer>
+    </div>
   );
 };
 

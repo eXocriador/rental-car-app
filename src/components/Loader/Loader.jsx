@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { LoaderContainer, Spinner, LoaderText } from "./Loader.styled";
+import styles from "./Loader.module.css";
 
 const Loader = ({ text = "Loading..." }) => {
   return (
-    <LoaderContainer>
+    <div className={styles.loaderContainer}>
       <div>
-        <Spinner />
-        <LoaderText>{text}</LoaderText>
+        <div className={styles.spinner} />
+        <p className={styles.loaderText}>{text}</p>
       </div>
-    </LoaderContainer>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { clearCars, setFilters } from "../redux/cars/carsSlice";
 import Filters from "../components/Filters/Filters";
 import CarList from "../components/CarList/CarList";
 import Loader from "../components/Loader/Loader";
-import { ContentWrapper } from "../components/Layout/Layout.styled";
+import styles from "../components/Layout/Layout.module.css";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const CatalogPage = () => {
   }
 
   return (
-    <ContentWrapper>
+    <div className={styles.contentWrapper}>
       <Filters onSearch={handleSearch} onReset={handleReset} />
 
       {isLoading && cars.length === 0 ? (
@@ -61,7 +61,7 @@ const CatalogPage = () => {
           isLoading={isLoading}
         />
       )}
-    </ContentWrapper>
+    </div>
   );
 };
 

@@ -2,18 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchCarBrands } from "../../redux/cars/operations";
-import {
-  FiltersForm,
-  FilterGroup,
-  FilterLabel,
-  FilterSelect,
-  MileageGroup,
-  MileageInputWrapper,
-  FilterInput,
-  ButtonGroup,
-  SearchButton,
-  ResetButton
-} from "./Filters.styled";
+import styles from "./Filters.module.css";
 
 const Filters = ({ onSearch, onReset }) => {
   const dispatch = useDispatch();
@@ -63,10 +52,13 @@ const Filters = ({ onSearch, onReset }) => {
   }
 
   return (
-    <FiltersForm onSubmit={handleSubmit}>
-      <FilterGroup style={{ width: "224px" }}>
-        <FilterLabel htmlFor="make">Car Brand</FilterLabel>
-        <FilterSelect
+    <form className={styles.filtersForm} onSubmit={handleSubmit}>
+      <div className={styles.filterGroup} style={{ width: "224px" }}>
+        <label className={styles.filterLabel} htmlFor="make">
+          Car Brand
+        </label>
+        <select
+          className={styles.filterSelect}
           id="make"
           name="make"
           value={filters.make}
@@ -78,12 +70,15 @@ const Filters = ({ onSearch, onReset }) => {
               {brand}
             </option>
           ))}
-        </FilterSelect>
-      </FilterGroup>
+        </select>
+      </div>
 
-      <FilterGroup style={{ width: "125px" }}>
-        <FilterLabel htmlFor="rentalPrice">Price/1 hour</FilterLabel>
-        <FilterSelect
+      <div className={styles.filterGroup} style={{ width: "125px" }}>
+        <label className={styles.filterLabel} htmlFor="rentalPrice">
+          Price/1 hour
+        </label>
+        <select
+          className={styles.filterSelect}
           id="rentalPrice"
           name="rentalPrice"
           value={filters.rentalPrice}
@@ -95,42 +90,50 @@ const Filters = ({ onSearch, onReset }) => {
               ${price}
             </option>
           ))}
-        </FilterSelect>
-      </FilterGroup>
+        </select>
+      </div>
 
-      <FilterGroup>
-        <FilterLabel>Mileage</FilterLabel>
-        <MileageGroup>
-          <MileageInputWrapper>
+      <div className={styles.filterGroup}>
+        <label className={styles.filterLabel}>Mileage</label>
+        <div className={styles.mileageGroup}>
+          <div className={styles.mileageInputWrapper}>
             <label>From</label>
-            <FilterInput
+            <input
+              className={styles.filterInput}
               name="mileageFrom"
               type="number"
               value={filters.mileageFrom}
               onChange={handleInputChange}
               min="0"
             />
-          </MileageInputWrapper>
-          <MileageInputWrapper>
+          </div>
+          <div className={styles.mileageInputWrapper}>
             <label>To</label>
-            <FilterInput
+            <input
+              className={styles.filterInput}
               name="mileageTo"
               type="number"
               value={filters.mileageTo}
               onChange={handleInputChange}
               min="0"
             />
-          </MileageInputWrapper>
-        </MileageGroup>
-      </FilterGroup>
+          </div>
+        </div>
+      </div>
 
-      <ButtonGroup>
-        <SearchButton type="submit">Search</SearchButton>
-        <ResetButton type="button" onClick={handleReset}>
+      <div className={styles.buttonGroup}>
+        <button className={styles.searchButton} type="submit">
+          Search
+        </button>
+        <button
+          className={styles.resetButton}
+          type="button"
+          onClick={handleReset}
+        >
           Reset
-        </ResetButton>
-      </ButtonGroup>
-    </FiltersForm>
+        </button>
+      </div>
+    </form>
   );
 };
 
