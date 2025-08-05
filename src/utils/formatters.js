@@ -12,14 +12,11 @@ export const formatMileage = (number) => {
 
 /**
  * Formats price with currency symbol
- * @param {number} price - The price to format
+ * @param {string|number} price - The price to format
  * @param {string} currency - Currency symbol (default: '$')
  * @returns {string} - Formatted price string
  */
 export const formatPrice = (price, currency = "$") => {
-  if (typeof price !== "number") {
-    return price;
-  }
   return `${currency}${price}`;
 };
 

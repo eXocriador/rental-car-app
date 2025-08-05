@@ -10,7 +10,9 @@ import {
   MileageGroup,
   MileageInputWrapper,
   FilterInput,
-  SearchButton
+  ButtonGroup,
+  SearchButton,
+  ResetButton
 } from "./Filters.styled";
 
 const Filters = ({ onSearch, onReset }) => {
@@ -122,7 +124,12 @@ const Filters = ({ onSearch, onReset }) => {
         </MileageGroup>
       </FilterGroup>
 
-      <SearchButton type="submit">Search</SearchButton>
+      <ButtonGroup>
+        <SearchButton type="submit">Search</SearchButton>
+        <ResetButton type="button" onClick={handleReset}>
+          Reset
+        </ResetButton>
+      </ButtonGroup>
     </FiltersForm>
   );
 };

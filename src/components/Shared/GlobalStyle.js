@@ -1,122 +1,103 @@
 import { createGlobalStyle } from "styled-components";
+import "modern-normalize";
 
 export const GlobalStyle = createGlobalStyle`
-  /* Modern CSS Reset */
-  *,
-  *::before,
-  *::after {
+  /* Modern Normalize is imported above */
+
+  /* Additional resets and base styles */
+  * {
     box-sizing: border-box;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
   html {
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
   }
 
   body {
-    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    -moz-osx-font-smoothing: grayscale;
     background-color: #ffffff;
     color: #121417;
-    min-height: 100vh;
+    line-height: 1.5;
+    overflow-x: hidden;
   }
 
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
-    display: block;
-    max-width: 100%;
+  #root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
+  /* Reset default styles */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: inherit;
+    font-size: inherit;
   }
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    overflow-wrap: break-word;
+  p {
+    margin: 0;
   }
 
-  #root,
-  #__next {
-    isolation: isolate;
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  /* Interactive elements */
-  button,
-  a,
-  select,
-  input[type="button"],
-  input[type="submit"],
-  input[type="reset"] {
-    cursor: pointer;
-  }
-
-  /* Container styles */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* Heading styles */
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  /* Link styles */
   a {
     text-decoration: none;
     color: inherit;
   }
 
-  /* Button base styles */
   button {
     border: none;
     background: none;
-    font-family: inherit;
-  }
-
-  /* Focus styles for accessibility */
-  *:focus {
-    outline: 2px solid #3470ff;
-    outline-offset: 2px;
-  }
-
-  /* Remove focus outline for mouse users */
-  *:focus:not(:focus-visible) {
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
     outline: none;
+  }
+
+  input, textarea, select {
+    font: inherit;
+    border: none;
+    outline: none;
+    background: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Remove default focus styles and add custom ones */
+  *:focus {
+    outline: none;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 `;

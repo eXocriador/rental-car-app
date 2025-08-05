@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export const DetailsContainer = styled.div`
-  padding: 40px;
-  max-width: 541px; /* As per design */
-  /* Removed background and border-radius as Modal handles these */
+  padding: 0;
+  width: 100%;
+  max-width: none;
 `;
 
 export const CarImage = styled.div`
   width: 100%;
-  height: 248px; /* Correct height from design */
-  border-radius: 14px;
+  height: 400px;
+  border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 14px;
+  margin-bottom: 24px;
 
   img {
     width: 100%;
@@ -21,11 +21,11 @@ export const CarImage = styled.div`
 `;
 
 export const CarTitle = styled.h2`
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.33; /* 24px */
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
   color: #121417;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 
   span {
     color: #3470ff;
@@ -35,76 +35,63 @@ export const CarTitle = styled.h2`
 export const InfoBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 6px;
-  margin-bottom: 14px;
-  font-size: 12px;
-  color: rgba(18, 20, 23, 0.5);
+  gap: 8px 12px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: rgba(18, 20, 23, 0.7);
   line-height: 1.5;
 `;
 
 export const InfoItem = styled.span`
+  background: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+
   &:not(:last-child)::after {
-    content: "|";
-    margin-left: 6px;
-    color: rgba(18, 20, 23, 0.1);
+    content: "";
   }
 `;
 
 export const CarDescription = styled.p`
-  font-size: 14px;
-  line-height: 1.43; /* 20px */
+  font-size: 18px;
+  line-height: 1.6;
   color: #121417;
-  margin-top: 14px;
-  margin-bottom: 24px;
+  margin-top: 20px;
+  margin-bottom: 32px;
+  max-width: 800px;
 `;
 
 export const SectionTitle = styled.h3`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.43; /* 20px */
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
   color: #121417;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  margin-top: 32px;
 `;
 
 export const RentalConditions = styled.div`
-  margin-top: 24px;
+  margin-top: 32px;
 `;
 
 export const ConditionsList = styled.div`
-  /* Change from ul to div */
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 `;
 
 export const ConditionItem = styled.p`
-  /* Change from li to p */
-  padding: 7px 14px;
-  border-radius: 35px;
-  background: #f9f9f9;
-  font-size: 12px;
-  line-height: 1.5; /* 18px */
+  padding: 12px 20px;
+  border-radius: 25px;
+  background: #f8f9fa;
+  font-size: 14px;
+  line-height: 1.5;
   color: #363535;
+  font-weight: 500;
 
   span {
-    font-weight: 600;
+    font-weight: 700;
     color: #3470ff;
-  }
-`;
-
-export const RentalButton = styled.a`
-  margin-top: 24px;
-  display: inline-block;
-  background: #3470ff;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 12px 50px;
-  border-radius: 12px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background: #0b44cd;
   }
 `;

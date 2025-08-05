@@ -16,6 +16,21 @@ export const fetchCarBrands = createAsyncThunk(
   }
 );
 
+// Fetch a single car by ID
+export const fetchCarById = createAsyncThunk(
+  "cars/fetchCarById",
+  async (carId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`/cars/${carId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch car details"
+      );
+    }
+  }
+);
+
 // Fetch cars with pagination and filters
 export const fetchAdverts = createAsyncThunk(
   "cars/fetchAdverts",

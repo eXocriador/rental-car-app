@@ -3,34 +3,47 @@ import { colors, fonts, spacing, borderRadius } from "../Shared/variables";
 
 export const FiltersForm = styled.form`
   display: flex;
-  gap: 18px;
+  gap: 20px;
   align-items: flex-end;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  padding: 32px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
 `;
 
 export const FilterGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.sm};
+  gap: 8px;
 `;
 
 export const FilterLabel = styled.label`
   font-size: 14px;
-  font-weight: 500;
-  color: #8a8a89;
+  font-weight: 600;
+  color: #121417;
+  margin-bottom: 4px;
 `;
 
 export const FilterSelect = styled.select`
   padding: 14px 18px;
-  border: none;
-  border-radius: 14px;
-  font-size: 18px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 500;
   color: #121417;
-  background-color: #f7f7fb;
+  background-color: #ffffff;
   height: 48px;
   cursor: pointer;
+  transition: all 0.3s ease;
   -webkit-appearance: none;
   appearance: none;
 
@@ -41,11 +54,18 @@ export const FilterSelect = styled.select`
 
   &:focus {
     outline: none;
+    border-color: #3470ff;
+    box-shadow: 0 0 0 3px rgba(52, 112, 255, 0.1);
+  }
+
+  &:hover {
+    border-color: #3470ff;
   }
 `;
 
 export const MileageGroup = styled.div`
   display: flex;
+  gap: 0;
 `;
 
 export const MileageInputWrapper = styled.div`
@@ -60,7 +80,7 @@ export const MileageInputWrapper = styled.div`
     position: absolute;
     left: 24px;
     top: 14px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: #121417;
     z-index: 0;
@@ -71,47 +91,101 @@ export const FilterInput = styled.input`
   padding: 14px 24px 14px 70px;
   width: 160px;
   height: 48px;
-  background: #f7f7fb;
-  border: none;
-  font-size: 18px;
+  background: #ffffff;
+  border: 2px solid #e9ecef;
+  font-size: 16px;
   font-weight: 500;
+  transition: all 0.3s ease;
 
   &:first-of-type {
-    border-radius: 14px 0 0 14px;
-    border-right: 1px solid rgba(138, 138, 137, 0.2);
+    border-radius: 12px 0 0 12px;
+    border-right: 1px solid #e9ecef;
   }
   &:last-of-type {
-    border-radius: 0 14px 14px 0;
+    border-radius: 0 12px 12px 0;
   }
 
   &:focus {
     outline: none;
+    border-color: #3470ff;
+    box-shadow: 0 0 0 3px rgba(52, 112, 255, 0.1);
   }
+
+  &:hover {
+    border-color: #3470ff;
+  }
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
 `;
 
 export const SearchButton = styled.button`
   background: #3470ff;
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  padding: 14px 44px;
+  padding: 14px 32px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
   font-family: ${fonts.primary};
   height: 48px;
-  min-width: 136px;
+  min-width: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(52, 112, 255, 0.3);
 
   &:hover {
     background: #0b44cd;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 112, 255, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:disabled {
-    background: ${colors.textSecondary};
+    background: #8a8a89;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+`;
+
+export const ResetButton = styled.button`
+  background: transparent;
+  color: #6c757d;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 24px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: ${fonts.primary};
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &:hover {
+    background: #f8f9fa;
+    border-color: #6c757d;
+    color: #495057;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;

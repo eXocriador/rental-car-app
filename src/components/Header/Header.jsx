@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import {
   HeaderContainer,
   HeaderContent,
@@ -11,12 +12,16 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo>RentalCar</Logo>
+        <Logo as={Link} to="/">
+          RentalCar
+        </Logo>
         <Navigation>
-          <NavItem to="/" end>
+          <NavItem as={NavLink} to="/" end>
             Home
           </NavItem>
-          <NavItem to="/catalog">Catalog</NavItem>
+          <NavItem as={NavLink} to="/catalog">
+            Catalog
+          </NavItem>
         </Navigation>
       </HeaderContent>
     </HeaderContainer>

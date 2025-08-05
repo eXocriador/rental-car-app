@@ -1,11 +1,14 @@
 import React, { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
 import { LayoutContainer, MainContent } from "./Layout.styled";
 
 const Layout = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
     <LayoutContainer>
       <Header />

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAdverts, fetchCarBrands } from "./operations";
+import { fetchAdverts, fetchCarBrands, fetchCarById } from "./operations";
 
 const initialState = {
   items: [],
@@ -8,7 +8,8 @@ const initialState = {
   error: null,
   total: null,
   currentPage: 1,
-  filters: {}
+  filters: {},
+  selectedCar: null
 };
 
 const carsSlice = createSlice({
@@ -25,6 +26,9 @@ const carsSlice = createSlice({
     },
     setFilters: (state, action) => {
       state.filters = action.payload;
+    },
+    clearSelectedCar: (state) => {
+      state.selectedCar = null;
     }
   },
   extraReducers: (builder) => {
@@ -56,6 +60,21 @@ const carsSlice = createSlice({
         state.error = action.payload || "Failed to fetch adverts";
       })
 
+      // Fetch car by ID
+      .addCase(fetchCarById.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchCarById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.selectedCar = action.payload;
+      })
+      .addCase(fetchCarById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || "Failed to fetch car details";
+      })
+
       // Fetch car brands
       .addCase(fetchCarBrands.pending, (state) => {
         state.error = null;
@@ -69,5 +88,6 @@ const carsSlice = createSlice({
   }
 });
 
-export const { clearError, clearCars, setFilters } = carsSlice.actions;
+export const { clearError, clearCars, setFilters, clearSelectedCar } =
+  carsSlice.actions;
 export default carsSlice.reducer;

@@ -15,8 +15,7 @@ import {
   SectionTitle,
   RentalConditions,
   ConditionsList,
-  ConditionItem,
-  RentalButton
+  ConditionItem
 } from "./CarDetails.styled";
 
 const CarDetails = ({ car }) => {
@@ -47,7 +46,7 @@ const CarDetails = ({ car }) => {
       </CarTitle>
 
       <InfoBlock>
-        <InfoItem>{car.address}</InfoItem>
+        <InfoItem>{car.address.split(",")[1]}</InfoItem>
         <InfoItem>Id: {car.id}</InfoItem>
         <InfoItem>Year: {car.year}</InfoItem>
         <InfoItem>Type: {capitalizeFirst(car.type)}</InfoItem>
@@ -89,8 +88,6 @@ const CarDetails = ({ car }) => {
           ))}
         </ConditionsList>
       </RentalConditions>
-
-      <RentalButton href="tel:+380730000000">Rental Car</RentalButton>
     </DetailsContainer>
   );
 };
