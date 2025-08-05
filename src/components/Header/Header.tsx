@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
@@ -13,7 +13,7 @@ const Header = () => {
           <NavLink
             to="/"
             end
-            className={({ isActive }) =>
+            className={({ isActive }: { isActive: boolean }) =>
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >
@@ -21,7 +21,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             to="/catalog"
-            className={({ isActive }) =>
+            className={({ isActive }: { isActive: boolean }) =>
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >

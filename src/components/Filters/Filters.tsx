@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { fetchCarBrands } from "../../redux/cars/operations";
 import styles from "./Filters.module.css";
+import type { FilterState } from "../../types";
+import type { RootState, AppDispatch } from "../../redux/store";
 
-const Filters = ({ onSearch, onReset }) => {
-  const dispatch = useDispatch();
-  const brands = useSelector((state) => state.cars.brands);
+interface FiltersProps {
+  onSearch: (filters: FilterState) => void;
+  onReset: () => void;
+}
 
-  const [filters, setFilters] = useState({
-    make: "",
-    rentalPrice: "",
+const Filters: React.FC<FiltersProps> = ({ onSearch, onReset }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const brands = useSelector((state: RootState) => state.cars.brands);
+
+  const [filters, setFilters] = useState<FilterState>({
+    brand: "",
+    price: "",
     mileageFrom: "",
     mileageTo: ""
   });
@@ -19,7 +25,7 @@ const Filters = ({ onSearch, onReset }) => {
     dispatch(fetchCarBrands());
   }, [dispatch]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFilters((prev) => ({
       ...prev,
@@ -27,18 +33,18 @@ const Filters = ({ onSearch, onReset }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const activeFilters = Object.fromEntries(
       Object.entries(filters).filter(([, value]) => value !== "")
-    );
+    ) as FilterState;
     onSearch(activeFilters);
   };
 
   const handleReset = () => {
     setFilters({
-      make: "",
-      rentalPrice: "",
+      brand: "",
+      price: "",
       mileageFrom: "",
       mileageTo: ""
     });
@@ -46,7 +52,7 @@ const Filters = ({ onSearch, onReset }) => {
   };
 
   // Generate price options
-  const priceOptions = [];
+  const priceOptions: number[] = [];
   for (let i = 30; i <= 500; i += 10) {
     priceOptions.push(i);
   }
@@ -54,18 +60,18 @@ const Filters = ({ onSearch, onReset }) => {
   return (
     <form className={styles.filtersForm} onSubmit={handleSubmit}>
       <div className={styles.filterGroup} style={{ width: "224px" }}>
-        <label className={styles.filterLabel} htmlFor="make">
+        <label className={styles.filterLabel} htmlFor="brand">
           Car Brand
         </label>
         <select
           className={styles.filterSelect}
-          id="make"
-          name="make"
-          value={filters.make}
+          id="brand"
+          name="brand"
+          value={filters.brand}
           onChange={handleInputChange}
         >
           <option value="">All brands</option>
-          {brands.map((brand) => (
+          {brands.map((brand: string) => (
             <option key={brand} value={brand}>
               {brand}
             </option>
@@ -74,14 +80,14 @@ const Filters = ({ onSearch, onReset }) => {
       </div>
 
       <div className={styles.filterGroup} style={{ width: "125px" }}>
-        <label className={styles.filterLabel} htmlFor="rentalPrice">
+        <label className={styles.filterLabel} htmlFor="price">
           Price/1 hour
         </label>
         <select
           className={styles.filterSelect}
-          id="rentalPrice"
-          name="rentalPrice"
-          value={filters.rentalPrice}
+          id="price"
+          name="price"
+          value={filters.price}
           onChange={handleInputChange}
         >
           <option value="">All prices</option>
@@ -135,11 +141,6 @@ const Filters = ({ onSearch, onReset }) => {
       </div>
     </form>
   );
-};
-
-Filters.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired
 };
 
 export default Filters;

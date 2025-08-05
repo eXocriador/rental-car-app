@@ -13,7 +13,7 @@ export const colors = {
   warning: "#FFBB33",
   overlay: "rgba(0, 0, 0, 0.5)",
   gray: "#F2F4F7"
-};
+} as const;
 
 export const fonts = {
   primary:
@@ -40,7 +40,7 @@ export const fonts = {
     normal: 1.4,
     relaxed: 1.6
   }
-};
+} as const;
 
 export const spacing = {
   xs: "0.25rem",
@@ -50,21 +50,21 @@ export const spacing = {
   xl: "2rem",
   "2xl": "3rem",
   "3xl": "4rem"
-};
+} as const;
 
 export const breakpoints = {
   sm: "480px",
   md: "768px",
   lg: "1024px",
   xl: "1200px"
-};
+} as const;
 
 export const shadows = {
   sm: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
   lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
   xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-};
+} as const;
 
 export const borderRadius = {
   sm: "0.25rem",
@@ -72,10 +72,10 @@ export const borderRadius = {
   lg: "0.5rem",
   xl: "0.75rem",
   full: "9999px"
-};
+} as const;
 
 export const transitions = {
   fast: "0.15s ease-in-out",
   normal: "0.2s ease-in-out",
   slow: "0.3s ease-in-out"
-};
+} as const;

@@ -1,11 +1,16 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, ReactNode } from "react";
 import CloseIcon from "../../assets/icons/close-icon.svg";
 import styles from "./Modal.module.css";
 
-const Modal = ({ isOpen, onClose, children }) => {
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}
+
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
@@ -24,7 +29,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   if (!isOpen) return null;
 
-  const handleOverlayClick = (e) => {
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -44,12 +49,6 @@ const Modal = ({ isOpen, onClose, children }) => {
       </div>
     </div>
   );
-};
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
 };
 
 export default Modal;

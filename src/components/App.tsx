@@ -11,7 +11,7 @@ import CatalogPage from "../pages/CatalogPage";
 import CarDetailsPage from "../pages/CarDetailsPage";
 import FavoritesPage from "../pages/FavoritesPage";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Router>
       <Routes>

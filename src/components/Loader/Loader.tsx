@@ -1,8 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./Loader.module.css";
 
-const Loader = ({ text = "Loading..." }) => {
+interface LoaderProps {
+  text?: string;
+}
+
+const Loader: React.FC<LoaderProps> = ({ text = "Loading..." }) => {
   return (
     <div className={styles.loaderContainer}>
       <div>
@@ -11,10 +14,6 @@ const Loader = ({ text = "Loading..." }) => {
       </div>
     </div>
   );
-};
-
-Loader.propTypes = {
-  text: PropTypes.string
 };
 
 export default Loader;

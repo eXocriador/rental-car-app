@@ -1,11 +1,37 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 import { formatPrice } from "../../utils/formatters";
 import styles from "./RentalForm.module.css";
+import type { Car } from "../../types";
 
-const RentalForm = ({ car, onSubmit, isSubmitted }) => {
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  startDate: string;
+  endDate: string;
+  pickupLocation: string;
+  dropoffLocation: string;
+  additionalNotes: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  startDate?: string;
+  endDate?: string;
+  pickupLocation?: string;
+}
+
+interface RentalFormProps {
+  car: Car;
+  onSubmit: (data: FormData & { carId: string; carBrand: string; carModel: string; carYear: number; rentalPrice: string }) => void;
+  isSubmitted: boolean;
+}
+
+const RentalForm: React.FC<RentalFormProps> = ({ car, onSubmit, isSubmitted }) => {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
@@ -16,10 +42,10 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
     additionalNotes: ""
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
-  const validateForm = () => {
-    const newErrors = {};
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -53,7 +79,7 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -61,7 +87,7 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
     }));
 
     // Clear error when user starts typing
-    if (errors[name]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({
         ...prev,
         [name]: ""
@@ -69,7 +95,7 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -80,7 +106,7 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
     const rentalData = {
       ...formData,
       carId: car.id,
-      carBrand: car.brand,
+      carBrand: car.make,
       carModel: car.model,
       carYear: car.year,
       rentalPrice: car.rentalPrice
@@ -109,7 +135,7 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
 
       <div className={styles.carInfo}>
         <h4>
-          {car.brand} {car.model}, {car.year}
+          {car.make} {car.model}, {car.year}
         </h4>
         <div className={styles.carPrice}>{formatPrice(car.rentalPrice)}</div>
       </div>
@@ -259,7 +285,7 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
             value={formData.additionalNotes}
             onChange={handleInputChange}
             placeholder="Any special requirements or notes..."
-            rows="4"
+            rows={4}
           />
         </div>
 
@@ -269,18 +295,6 @@ const RentalForm = ({ car, onSubmit, isSubmitted }) => {
       </form>
     </div>
   );
-};
-
-RentalForm.propTypes = {
-  car: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    brand: PropTypes.string.isRequired,
-    model: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rentalPrice: PropTypes.string.isRequired
-  }).isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  isSubmitted: PropTypes.bool.isRequired
 };
 
 export default RentalForm;

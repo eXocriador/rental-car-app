@@ -1,14 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchAdverts, fetchCarBrands, fetchCarById } from "./operations";
+import type { Car, FilterState } from "../../types";
 
-const initialState = {
+interface CarsState {
+  items: Car[];
+  brands: string[];
+  isLoading: boolean;
+  error: string | null;
+  total: number | null;
+  currentPage: number;
+  filters: FilterState;
+  selectedCar: Car | null;
+}
+
+const initialState: CarsState = {
   items: [],
   brands: [],
   isLoading: false,
   error: null,
   total: null,
   currentPage: 1,
-  filters: {},
+  filters: {
+    brand: "",
+    price: "",
+    mileageFrom: "",
+    mileageTo: ""
+  },
   selectedCar: null
 };
 
@@ -24,7 +41,7 @@ const carsSlice = createSlice({
       state.currentPage = 1;
       state.total = null;
     },
-    setFilters: (state, action) => {
+    setFilters: (state, action: PayloadAction<FilterState>) => {
       state.filters = action.payload;
     },
     clearSelectedCar: (state) => {
@@ -57,7 +74,7 @@ const carsSlice = createSlice({
       })
       .addCase(fetchAdverts.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload || "Failed to fetch adverts";
+        state.error = (action.payload as string) || "Failed to fetch adverts";
       })
 
       // Fetch car by ID
@@ -72,7 +89,7 @@ const carsSlice = createSlice({
       })
       .addCase(fetchCarById.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload || "Failed to fetch car details";
+        state.error = (action.payload as string) || "Failed to fetch car details";
       })
 
       // Fetch car brands
@@ -83,7 +100,7 @@ const carsSlice = createSlice({
         state.brands = action.payload || [];
       })
       .addCase(fetchCarBrands.rejected, (state, action) => {
-        state.error = action.payload || "Failed to fetch car brands";
+        state.error = (action.payload as string) || "Failed to fetch car brands";
       });
   }
 });

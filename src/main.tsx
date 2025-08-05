@@ -7,18 +7,16 @@ import App from "./components/App";
 import { store, persistor } from "./redux/store";
 import { injectGlobalStyles } from "./components/Shared/GlobalStyle";
 import {
-  colors,
-  fonts,
-  spacing,
-  shadows,
-  borderRadius,
-  transitions
+  colors
 } from "./components/Shared/variables";
 
 // Inject global styles
 injectGlobalStyles();
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Failed to find the root element");
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

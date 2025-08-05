@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { fetchAdverts, fetchCarById } from "../redux/cars/operations";
+import { fetchCarById } from "../redux/cars/operations";
 import { clearSelectedCar } from "../redux/cars/carsSlice";
 import CarDetails from "../components/CarDetails/CarDetails";
 import RentalForm from "../components/RentalForm/RentalForm";
 import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
 import styles from "./CarDetailsPage.module.css";
+import type { RootState, AppDispatch } from "../redux/store";
 
-const CarDetailsPage = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+const CarDetailsPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch<AppDispatch>();
   const {
     items: cars,
     selectedCar,
     isLoading
-  } = useSelector((state) => state.cars);
+  } = useSelector((state: RootState) => state.cars);
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    if (!id) return;
+
     // If cars are already loaded, find the car by ID
     if (cars.length > 0) {
-      const foundCar = cars.find((c) => c.id === id);
+      const foundCar = cars.find((c: any) => c.id === id);
       if (foundCar) {
         return;
       }
@@ -35,7 +37,7 @@ const CarDetailsPage = () => {
     // If car not found in current cars, fetch it by ID
     dispatch(fetchCarById(id))
       .then((result) => {
-        if (result.error) {
+        if ("error" in result) {
           toast.error("Failed to load car details");
         }
       })
@@ -48,7 +50,7 @@ const CarDetailsPage = () => {
     };
   }, [id, cars, dispatch]);
 
-  const handleRentalSubmit = (formData) => {
+  const handleRentalSubmit = (formData: any) => {
     // Simulate API call for rental booking
     console.log("Rental form submitted:", formData);
 
@@ -72,7 +74,7 @@ const CarDetailsPage = () => {
   };
 
   // Get car data from either selectedCar or cars array
-  const car = selectedCar || cars.find((c) => c.id === id);
+  const car = selectedCar || cars.find((c: any) => c.id === id);
 
   if (isLoading && !car) {
     return <Loader text="Loading car details..." />;

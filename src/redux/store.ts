@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import carsReducer from "./cars/carsSlice";
 import favoritesReducer from "./favorites/favoritesSlice";
+import type { RootState as AppRootState } from "../types";
 
 // Persist configuration for favorites
 const favoritesPersistConfig = {
@@ -30,3 +31,6 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = AppRootState;

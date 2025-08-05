@@ -103,7 +103,7 @@ const globalStyles = `
 `;
 
 // Function to inject global styles
-export const injectGlobalStyles = () => {
+export const injectGlobalStyles = (): void => {
   const styleElement = document.createElement("style");
   styleElement.textContent = globalStyles;
   document.head.appendChild(styleElement);

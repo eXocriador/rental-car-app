@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 import styles from "./HomePage.module.css";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleViewCatalog = () => {

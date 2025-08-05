@@ -1,20 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
-  formatMileage,
-  formatPrice,
   capitalizeFirst
 } from "../../utils/formatters";
 import styles from "./CarDetails.module.css";
+import type { Car } from "../../types";
 
-const CarDetails = ({ car }) => {
+interface CarDetailsProps {
+  car: Car;
+}
+
+const CarDetails: React.FC<CarDetailsProps> = ({ car }) => {
   // Handle rentalConditions as either array or string
   const rentalConditions = Array.isArray(car.rentalConditions)
     ? car.rentalConditions
     : car.rentalConditions.split("\n").filter((condition) => condition.trim());
 
   // Function to parse conditions and wrap numbers in spans
-  const parseCondition = (condition) => {
+  const parseCondition = (condition: string) => {
     const parts = condition.split(/(\d+)/);
     return parts.map((part, index) => {
       if (/^\d+$/.test(part)) {
@@ -27,11 +29,11 @@ const CarDetails = ({ car }) => {
   return (
     <div className={styles.detailsContainer}>
       <div className={styles.carImage}>
-        <img src={car.img} alt={`${car.brand} ${car.model}`} />
+        <img src={car.img} alt={`${car.make} ${car.model}`} />
       </div>
 
       <h2 className={styles.carTitle}>
-        {car.brand} <span>{car.model}</span>, {car.year}
+        {car.make} <span>{car.model}</span>, {car.year}
       </h2>
 
       <div className={styles.infoBlock}>
@@ -89,30 +91,6 @@ const CarDetails = ({ car }) => {
       </div>
     </div>
   );
-};
-
-CarDetails.propTypes = {
-  car: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    brand: PropTypes.string.isRequired,
-    model: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    fuelConsumption: PropTypes.string.isRequired,
-    engineSize: PropTypes.string.isRequired,
-    accessories: PropTypes.arrayOf(PropTypes.string).isRequired,
-    functionalities: PropTypes.arrayOf(PropTypes.string).isRequired,
-    rentalPrice: PropTypes.string.isRequired,
-    rentalCompany: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    rentalConditions: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
-    ]).isRequired,
-    mileage: PropTypes.number.isRequired
-  }).isRequired
 };
 
 export default CarDetails;

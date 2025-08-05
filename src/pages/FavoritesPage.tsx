@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CarList from "../components/CarList/CarList";
 import styles from "./FavoritesPage.module.css";
+import type { RootState } from "../redux/store";
 
-const FavoritesPage = () => {
-  const favorites = useSelector((state) => state.favorites.items);
+const FavoritesPage: React.FC = () => {
+  const favorites = useSelector((state: RootState) => state.favorites.items);
 
   const handleBrowseCatalog = () => {
     window.location.href = "/catalog";

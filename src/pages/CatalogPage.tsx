@@ -6,15 +6,17 @@ import Filters from "../components/Filters/Filters";
 import CarList from "../components/CarList/CarList";
 import Loader from "../components/Loader/Loader";
 import styles from "../components/Layout/Layout.module.css";
+import type { FilterState } from "../types";
+import type { RootState, AppDispatch } from "../redux/store";
 
-const CatalogPage = () => {
-  const dispatch = useDispatch();
+const CatalogPage: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const {
     items: cars,
     isLoading,
     total,
     currentPage
-  } = useSelector((state) => state.cars);
+  } = useSelector((state: RootState) => state.cars);
 
   useEffect(() => {
     // Load initial data
@@ -26,13 +28,18 @@ const CatalogPage = () => {
     };
   }, [dispatch]);
 
-  const handleSearch = (filters) => {
+  const handleSearch = (filters: FilterState) => {
     dispatch(setFilters(filters));
     dispatch(fetchAdverts({ page: 1, filters }));
   };
 
   const handleReset = () => {
-    dispatch(setFilters({}));
+    dispatch(setFilters({
+      brand: "",
+      price: "",
+      mileageFrom: "",
+      mileageTo: ""
+    }));
     dispatch(fetchAdverts({ page: 1 }));
   };
 
@@ -41,7 +48,7 @@ const CatalogPage = () => {
     dispatch(fetchAdverts({ page: nextPage }));
   };
 
-  const hasMore = cars.length < total;
+  const hasMore = cars.length < (total || 0);
 
   if (isLoading && cars.length === 0) {
     return <Loader text="Loading cars..." />;
