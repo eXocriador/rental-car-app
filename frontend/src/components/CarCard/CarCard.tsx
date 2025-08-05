@@ -74,7 +74,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <div className={styles.cardImage}>
         <img
           src={car.img}
-          alt={`${car.make} ${car.model}`}
+                      alt={`${car.brand} ${car.carModel}`}
           onError={handleImageError}
         />
         <button
@@ -91,7 +91,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <div className={styles.cardContent}>
         <div className={styles.cardHeader}>
           <h3 className={styles.carTitle}>
-            {car.make} <span>{car.model}</span>, {car.year}
+            {car.brand} <span>{car.carModel}</span>, {car.year}
           </h3>
           <div className={styles.carPrice}>{formatPrice(car.rentalPrice)}</div>
         </div>
@@ -101,7 +101,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
           <span className={styles.detailItem}>{car.address.split(",")[2]}</span>
           <span className={styles.detailItem}>{car.rentalCompany}</span>
           <span className={styles.detailItem}>{capitalizeFirst(car.type)}</span>
-          <span className={styles.detailItem}>{car.model}</span>
+                        <span className={styles.detailItem}>{car.carModel}</span>
           <span className={styles.detailItem}>
             {formatMileage(car.mileage)}
           </span>

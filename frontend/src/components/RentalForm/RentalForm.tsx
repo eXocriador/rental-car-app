@@ -26,11 +26,23 @@ interface FormErrors {
 
 interface RentalFormProps {
   car: Car;
-  onSubmit: (data: FormData & { carId: string; carBrand: string; carModel: string; carYear: number; rentalPrice: string }) => void;
+  onSubmit: (
+    data: FormData & {
+      carId: string;
+      carBrand: string;
+      carModel: string;
+      carYear: number;
+      rentalPrice: string;
+    }
+  ) => void;
   isSubmitted: boolean;
 }
 
-const RentalForm: React.FC<RentalFormProps> = ({ car, onSubmit, isSubmitted }) => {
+const RentalForm: React.FC<RentalFormProps> = ({
+  car,
+  onSubmit,
+  isSubmitted
+}) => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -79,7 +91,11 @@ const RentalForm: React.FC<RentalFormProps> = ({ car, onSubmit, isSubmitted }) =
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -106,8 +122,8 @@ const RentalForm: React.FC<RentalFormProps> = ({ car, onSubmit, isSubmitted }) =
     const rentalData = {
       ...formData,
       carId: car.id,
-      carBrand: car.make,
-      carModel: car.model,
+              carBrand: car.brand,
+        carModel: car.carModel,
       carYear: car.year,
       rentalPrice: car.rentalPrice
     };
@@ -134,9 +150,9 @@ const RentalForm: React.FC<RentalFormProps> = ({ car, onSubmit, isSubmitted }) =
       <h2 className={styles.formTitle}>Book This Car</h2>
 
       <div className={styles.carInfo}>
-        <h4>
-          {car.make} {car.model}, {car.year}
-        </h4>
+                  <h4>
+            {car.brand} {car.carModel}, {car.year}
+          </h4>
         <div className={styles.carPrice}>{formatPrice(car.rentalPrice)}</div>
       </div>
 

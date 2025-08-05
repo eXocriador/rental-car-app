@@ -1,10 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { connectDB } from './utils/database';
-import { errorHandler, notFound } from './middleware/errorHandler';
-import carRoutes from './routes/cars';
-import bookingRoutes from './routes/bookings';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { connectDB } from "./utils/database";
+import { errorHandler, notFound } from "./middleware/errorHandler";
+import carRoutes from "./routes/cars";
+import bookingRoutes from "./routes/bookings";
 
 // Load environment variables
 dotenv.config();
@@ -21,14 +21,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api/cars', carRoutes);
-app.use('/api/bookings', bookingRoutes);
+app.use("/api/cars", carRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.get("/api/brands", async (req, res) => {
+  try {
+    const { Car } = await import("./models/Car");
+    const brands = await Car.distinct("brand");
+    res.status(200).json(brands);
+  } catch (error) {
+    res.status(500).json({ success: false, error: "Failed to fetch brands" });
+  }
+});
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'Rental Car API is running',
+    message: "Rental Car API is running",
     timestamp: new Date().toISOString()
   });
 });
@@ -42,12 +51,12 @@ const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
 });
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (err: Error) => {
-  console.log('Unhandled Rejection:', err.message);
+process.on("unhandledRejection", (err: Error) => {
+  console.log("Unhandled Rejection:", err.message);
   // Close server & exit process
   process.exit(1);
-}); 
+});

@@ -1,11 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
-import { Booking } from '../models/Booking';
-import { Car } from '../models/Car';
+import { Request, Response, NextFunction } from "express";
+import { Booking } from "../models/Booking";
+import { Car } from "../models/Car";
 
 // @desc    Create new booking
 // @route   POST /api/bookings
 // @access  Public
-export const createBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const createBooking = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const {
       carId,
@@ -22,7 +26,7 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
     if (!car) {
       res.status(404).json({
         success: false,
-        error: 'Car not found'
+        error: "Car not found"
       });
       return;
     }
@@ -30,13 +34,15 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
     // Calculate total price based on rental days
     const start = new Date(startDate);
     const end = new Date(endDate);
-    const daysDiff = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    const daysDiff = Math.ceil(
+      (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+    );
     const totalPrice = car.rentalPrice * daysDiff;
 
     // Check if car is available for the selected dates
     const conflictingBooking = await Booking.findOne({
       carId,
-      status: { $in: ['pending', 'confirmed'] },
+      status: { $in: ["pending", "confirmed"] },
       $or: [
         {
           startDate: { $lte: end },
@@ -48,7 +54,7 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
     if (conflictingBooking) {
       res.status(400).json({
         success: false,
-        error: 'Car is not available for the selected dates'
+        error: "Car is not available for the selected dates"
       });
       return;
     }
@@ -66,7 +72,7 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
     });
 
     // Populate car details
-    await booking.populate('carId');
+    await booking.populate("carId");
 
     res.status(201).json({
       success: true,
@@ -80,14 +86,18 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
 // @desc    Get all bookings
 // @route   GET /api/bookings
 // @access  Private (for admin)
-export const getBookings = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getBookings = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
     const bookings = await Booking.find()
-      .populate('carId')
+      .populate("carId")
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
@@ -109,14 +119,18 @@ export const getBookings = async (req: Request, res: Response, next: NextFunctio
 // @desc    Get booking by ID
 // @route   GET /api/bookings/:id
 // @access  Private (for admin)
-export const getBookingById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getBookingById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-    const booking = await Booking.findById(req.params.id).populate('carId');
+    const booking = await Booking.findById(req.params.id).populate("carId");
 
     if (!booking) {
       res.status(404).json({
         success: false,
-        error: 'Booking not found'
+        error: "Booking not found"
       });
       return;
     }
@@ -133,7 +147,11 @@ export const getBookingById = async (req: Request, res: Response, next: NextFunc
 // @desc    Update booking status
 // @route   PUT /api/bookings/:id
 // @access  Private (for admin)
-export const updateBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const updateBooking = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { status } = req.body;
 
@@ -141,12 +159,12 @@ export const updateBooking = async (req: Request, res: Response, next: NextFunct
       req.params.id,
       { status },
       { new: true, runValidators: true }
-    ).populate('carId');
+    ).populate("carId");
 
     if (!booking) {
       res.status(404).json({
         success: false,
-        error: 'Booking not found'
+        error: "Booking not found"
       });
       return;
     }
@@ -163,14 +181,18 @@ export const updateBooking = async (req: Request, res: Response, next: NextFunct
 // @desc    Delete booking
 // @route   DELETE /api/bookings/:id
 // @access  Private (for admin)
-export const deleteBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const deleteBooking = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const booking = await Booking.findByIdAndDelete(req.params.id);
 
     if (!booking) {
       res.status(404).json({
         success: false,
-        error: 'Booking not found'
+        error: "Booking not found"
       });
       return;
     }
@@ -182,4 +204,4 @@ export const deleteBooking = async (req: Request, res: Response, next: NextFunct
   } catch (error) {
     next(error);
   }
-}; 
+};

@@ -37,26 +37,30 @@ rental-car-app/
 ### Встановлення
 
 1. **Клонуйте репозиторій**
+
    ```bash
    git clone <repository-url>
    cd rental-car-app
    ```
 
 2. **Встановіть залежності для бекенду**
+
    ```bash
    cd backend
    npm install
    ```
 
 3. **Встановіть залежності для фронтенду**
+
    ```bash
    cd ../frontend
    npm install
    ```
 
 4. **Налаштуйте змінні середовища**
-   
+
    Створіть файл `.env` в папці `backend`:
+
    ```env
    NODE_ENV=development
    PORT=4000
@@ -74,6 +78,7 @@ rental-car-app/
 #### Розробка
 
 1. **Запустіть бекенд**
+
    ```bash
    cd backend
    npm run dev
@@ -88,6 +93,7 @@ rental-car-app/
 #### Продакшн
 
 1. **Зберіть бекенд**
+
    ```bash
    cd backend
    npm run build
@@ -103,6 +109,7 @@ rental-car-app/
 ## 🛠️ Технології
 
 ### Frontend
+
 - **React 18** - UI бібліотека
 - **TypeScript** - Type-safe JavaScript
 - **Redux Toolkit** - State management
@@ -111,6 +118,7 @@ rental-car-app/
 - **Vite** - Build tool
 
 ### Backend
+
 - **Node.js** - JavaScript runtime
 - **Express** - Web framework
 - **TypeScript** - Type-safe JavaScript
@@ -121,6 +129,7 @@ rental-car-app/
 ## 📱 Функціональність
 
 ### Для користувачів
+
 - ✅ Перегляд каталогу автомобілів
 - ✅ Фільтрація за брендом, ціною та пробігом
 - ✅ Детальна інформація про автомобіль
@@ -129,6 +138,7 @@ rental-car-app/
 - ✅ Адаптивний дизайн
 
 ### Для адміністраторів
+
 - ✅ Управління каталогом автомобілів
 - ✅ Перегляд та управління бронюваннями
 - ✅ Статистика та аналітика
@@ -136,6 +146,7 @@ rental-car-app/
 ## 🔧 API Ендпоінти
 
 ### Автомобілі
+
 - `GET /api/cars` - Список автомобілів з пагінацією та фільтрами
 - `GET /api/cars/:id` - Деталі автомобіля
 - `GET /api/brands` - Список брендів
@@ -144,6 +155,7 @@ rental-car-app/
 - `DELETE /api/cars/:id` - Видалення автомобіля (адмін)
 
 ### Бронювання
+
 - `POST /api/bookings` - Створення бронювання
 - `GET /api/bookings` - Список бронювань (адмін)
 - `GET /api/bookings/:id` - Деталі бронювання (адмін)
@@ -153,6 +165,7 @@ rental-car-app/
 ## 📊 База даних
 
 ### Модель Car
+
 ```typescript
 {
   year: number;
@@ -174,6 +187,7 @@ rental-car-app/
 ```
 
 ### Модель Booking
+
 ```typescript
 {
   carId: ObjectId;
@@ -184,7 +198,7 @@ rental-car-app/
   endDate: Date;
   pickupLocation: string;
   totalPrice: number;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  status: "pending" | "confirmed" | "cancelled" | "completed";
 }
 ```
 
@@ -218,17 +232,20 @@ npm test
 ## 📦 Розгортання
 
 ### Docker (майбутнє)
+
 ```bash
 docker-compose up -d
 ```
 
 ### Vercel (Frontend)
+
 ```bash
 cd frontend
 vercel --prod
 ```
 
 ### Railway/Heroku (Backend)
+
 ```bash
 cd backend
 # Налаштуйте змінні середовища
@@ -256,4 +273,4 @@ git push heroku main
 - [React](https://reactjs.org/)
 - [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/)
-- [TypeScript](https://www.typescriptlang.org/) 
+- [TypeScript](https://www.typescriptlang.org/)

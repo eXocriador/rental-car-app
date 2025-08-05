@@ -5,6 +5,7 @@
 ### Варіант 1: Локальна MongoDB
 
 1. **macOS (з Homebrew):**
+
    ```bash
    brew tap mongodb/brew
    brew install mongodb-community
@@ -12,6 +13,7 @@
    ```
 
 2. **Windows:**
+
    - Завантажте MongoDB з [офіційного сайту](https://www.mongodb.com/try/download/community)
    - Встановіть та запустіть MongoDB як службу
 
@@ -41,6 +43,7 @@ MONGO_URI=mongodb://localhost:27017/rental-car-app
 ```
 
 Для MongoDB Atlas використовуйте:
+
 ```env
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/rental-car-app?retryWrites=true&w=majority
 ```
@@ -62,11 +65,13 @@ npm run seed
 ## Крок 5: Запуск проєкту
 
 ### Розробка (паралельний запуск фронтенду та бекенду)
+
 ```bash
 npm run dev
 ```
 
 ### Окремі запуски
+
 ```bash
 # Тільки бекенд
 npm run dev:backend
@@ -91,6 +96,7 @@ npm run dev:frontend
 ## Вирішення проблем
 
 ### Помилка підключення до MongoDB
+
 ```bash
 # Перевірте статус MongoDB
 brew services list | grep mongodb
@@ -100,9 +106,11 @@ sudo systemctl status mongodb
 ```
 
 ### Помилка порту
+
 Якщо порт 4000 зайнятий, змініть `PORT` в `.env` файлі.
 
 ### Помилка CORS
+
 Переконайтеся, що фронтенд запущений на порту 5173, а бекенд на порту 4000.
 
 ## Корисні команди
@@ -120,4 +128,4 @@ npm run dev
 curl http://localhost:4000/api/health
 curl http://localhost:4000/api/cars
 curl http://localhost:4000/api/brands
-``` 
+```

@@ -29,11 +29,11 @@ const CarDetails: React.FC<CarDetailsProps> = ({ car }) => {
   return (
     <div className={styles.detailsContainer}>
       <div className={styles.carImage}>
-        <img src={car.img} alt={`${car.make} ${car.model}`} />
+        <img src={car.img} alt={`${car.brand} ${car.carModel}`} />
       </div>
 
       <h2 className={styles.carTitle}>
-        {car.make} <span>{car.model}</span>, {car.year}
+        {car.brand} <span>{car.carModel}</span>, {car.year}
       </h2>
 
       <div className={styles.infoBlock}>

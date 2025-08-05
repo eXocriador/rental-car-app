@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import {
   getCars,
   getCarById,
@@ -6,18 +6,18 @@ import {
   createCar,
   updateCar,
   deleteCar
-} from '../controllers/carController';
+} from "../controllers/carController";
 
 const router = express.Router();
 
 // Public routes
-router.get('/', getCars);
-router.get('/brands', getBrands);
-router.get('/:id', getCarById);
+router.get("/brands", getBrands);
+router.get("/", getCars);
+router.get("/:id", getCarById);
 
 // Admin routes (for future use with authentication)
-router.post('/', createCar);
-router.put('/:id', updateCar);
-router.delete('/:id', deleteCar);
+router.post("/", createCar);
+router.put("/:id", updateCar);
+router.delete("/:id", deleteCar);
 
-export default router; 
+export default router;

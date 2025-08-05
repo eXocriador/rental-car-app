@@ -1,16 +1,17 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/rental-car-app';
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/rental-car-app";
 
 export const connectDB = async (): Promise<void> => {
   try {
     const conn = await mongoose.connect(MONGO_URI);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
+    console.error("Error connecting to MongoDB:", error);
     process.exit(1);
   }
 };
@@ -18,8 +19,8 @@ export const connectDB = async (): Promise<void> => {
 export const disconnectDB = async (): Promise<void> => {
   try {
     await mongoose.disconnect();
-    console.log('MongoDB Disconnected');
+    console.log("MongoDB Disconnected");
   } catch (error) {
-    console.error('Error disconnecting from MongoDB:', error);
+    console.error("Error disconnecting from MongoDB:", error);
   }
-}; 
+};

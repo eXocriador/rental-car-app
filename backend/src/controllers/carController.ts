@@ -1,10 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
-import { Car } from '../models/Car';
+import { Request, Response, NextFunction } from "express";
+import { Car } from "../models/Car";
 
 // @desc    Get all cars with pagination and filters
 // @route   GET /api/cars
 // @access  Public
-export const getCars = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getCars = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 12;
@@ -13,8 +17,8 @@ export const getCars = async (req: Request, res: Response, next: NextFunction): 
     // Build filter object
     const filter: any = {};
 
-    if (req.query.make) {
-      filter.make = { $regex: req.query.make as string, $options: 'i' };
+    if (req.query.brand) {
+      filter.brand = { $regex: req.query.brand as string, $options: "i" };
     }
 
     if (req.query.rentalPrice) {
@@ -22,11 +26,17 @@ export const getCars = async (req: Request, res: Response, next: NextFunction): 
     }
 
     if (req.query.minMileage) {
-      filter.mileage = { ...filter.mileage, $gte: parseInt(req.query.minMileage as string) };
+      filter.mileage = {
+        ...filter.mileage,
+        $gte: parseInt(req.query.minMileage as string)
+      };
     }
 
     if (req.query.maxMileage) {
-      filter.mileage = { ...filter.mileage, $lte: parseInt(req.query.maxMileage as string) };
+      filter.mileage = {
+        ...filter.mileage,
+        $lte: parseInt(req.query.maxMileage as string)
+      };
     }
 
     // Execute query with pagination
@@ -55,14 +65,18 @@ export const getCars = async (req: Request, res: Response, next: NextFunction): 
 // @desc    Get single car by ID
 // @route   GET /api/cars/:id
 // @access  Public
-export const getCarById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getCarById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const car = await Car.findById(req.params.id);
 
     if (!car) {
       res.status(404).json({
         success: false,
-        error: 'Car not found'
+        error: "Car not found"
       });
       return;
     }
@@ -79,10 +93,14 @@ export const getCarById = async (req: Request, res: Response, next: NextFunction
 // @desc    Get all car brands
 // @route   GET /api/brands
 // @access  Public
-export const getBrands = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getBrands = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-    const brands = await Car.distinct('make');
-    
+    const brands = await Car.distinct("brand");
+
     res.status(200).json(brands);
   } catch (error) {
     next(error);
@@ -92,7 +110,11 @@ export const getBrands = async (req: Request, res: Response, next: NextFunction)
 // @desc    Create new car
 // @route   POST /api/cars
 // @access  Private (for admin)
-export const createCar = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const createCar = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const car = await Car.create(req.body);
 
@@ -108,7 +130,11 @@ export const createCar = async (req: Request, res: Response, next: NextFunction)
 // @desc    Update car
 // @route   PUT /api/cars/:id
 // @access  Private (for admin)
-export const updateCar = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const updateCar = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const car = await Car.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -118,7 +144,7 @@ export const updateCar = async (req: Request, res: Response, next: NextFunction)
     if (!car) {
       res.status(404).json({
         success: false,
-        error: 'Car not found'
+        error: "Car not found"
       });
       return;
     }
@@ -135,14 +161,18 @@ export const updateCar = async (req: Request, res: Response, next: NextFunction)
 // @desc    Delete car
 // @route   DELETE /api/cars/:id
 // @access  Private (for admin)
-export const deleteCar = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const deleteCar = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const car = await Car.findByIdAndDelete(req.params.id);
 
     if (!car) {
       res.status(404).json({
         success: false,
-        error: 'Car not found'
+        error: "Car not found"
       });
       return;
     }
@@ -154,4 +184,4 @@ export const deleteCar = async (req: Request, res: Response, next: NextFunction)
   } catch (error) {
     next(error);
   }
-}; 
+};

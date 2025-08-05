@@ -27,18 +27,21 @@ src/
 ## Встановлення та налаштування
 
 1. **Клонуйте репозиторій**
+
    ```bash
    git clone <repository-url>
    cd rental-car-app/backend
    ```
 
 2. **Встановіть залежності**
+
    ```bash
    npm install
    ```
 
 3. **Налаштуйте змінні середовища**
    Створіть файл `.env` в корені папки `backend`:
+
    ```env
    NODE_ENV=development
    PORT=4000
@@ -56,11 +59,13 @@ src/
 ## Запуск
 
 ### Розробка
+
 ```bash
 npm run dev
 ```
 
 ### Продакшн
+
 ```bash
 npm run build
 npm start
@@ -95,6 +100,7 @@ npm start
 - `maxMileage` - Максимальний пробіг
 
 ### Приклад запиту
+
 ```
 GET /api/cars?page=1&limit=12&make=BMW&rentalPrice=100&minMileage=10000&maxMileage=50000
 ```
@@ -102,6 +108,7 @@ GET /api/cars?page=1&limit=12&make=BMW&rentalPrice=100&minMileage=10000&maxMilea
 ## Моделі даних
 
 ### Car
+
 ```typescript
 {
   year: number;
@@ -123,6 +130,7 @@ GET /api/cars?page=1&limit=12&make=BMW&rentalPrice=100&minMileage=10000&maxMilea
 ```
 
 ### Booking
+
 ```typescript
 {
   carId: ObjectId;
@@ -133,7 +141,7 @@ GET /api/cars?page=1&limit=12&make=BMW&rentalPrice=100&minMileage=10000&maxMilea
   endDate: Date;
   pickupLocation: string;
   totalPrice: number;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  status: "pending" | "confirmed" | "cancelled" | "completed";
 }
 ```
 
@@ -150,4 +158,4 @@ API повертає стандартизовані JSON відповіді з �
 
 ## Ліцензія
 
-ISC 
+ISC

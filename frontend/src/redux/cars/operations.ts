@@ -11,7 +11,7 @@ interface ApiCar {
   id: string;
   year: number;
   brand: string; // API returns 'brand'
-  model: string;
+  carModel: string;
   type: string;
   img: string;
   description: string;
@@ -63,11 +63,13 @@ export const fetchCarById = createAsyncThunk<
   { rejectValue: string }
 >("cars/fetchCarById", async (carId, { rejectWithValue }) => {
   try {
-    const response = await axiosInstance.get<{ success: boolean; data: ApiCar }>(`/cars/${carId}`);
-    // Map API response to our Car interface (brand -> make)
+    const response = await axiosInstance.get<{
+      success: boolean;
+      data: ApiCar;
+    }>(`/cars/${carId}`);
+    // Map API response to our Car interface
     return {
-      ...response.data.data,
-      make: response.data.data.brand
+      ...response.data.data
     };
   } catch (error: any) {
     return rejectWithValue(
@@ -113,15 +115,16 @@ export const fetchAdverts = createAsyncThunk<
         params.maxMileage = filters.mileageTo;
       }
 
-      const response = await axiosInstance.get<{ success: boolean; cars: ApiCar[]; totalCars: number }>("/cars", {
+      const response = await axiosInstance.get<{
+        success: boolean;
+        cars: ApiCar[];
+        totalCars: number;
+      }>("/cars", {
         params
       });
 
-      // Map API response to our Car interface (brand -> make)
-      const mappedCars = (response.data.cars || []).map((car) => ({
-        ...car,
-        make: car.brand // Map brand to make for consistency
-      }));
+      // Map API response to our Car interface
+      const mappedCars = response.data.cars || [];
 
       return {
         data: {
