@@ -8,119 +8,128 @@ import {
 } from "../Shared/variables";
 
 export const CardContainer = styled.div`
-  background: white;
-  border-radius: 12px;
-  border: 1px solid ${colors.border};
-  overflow: hidden;
-  transition: ${transitions.normal};
-  cursor: pointer;
+  width: 274px;
+  height: 426px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   font-family: ${fonts.primary};
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${shadows.lg};
-    border-color: ${colors.primary};
-  }
 `;
 
 export const CardImage = styled.div`
   position: relative;
   width: 100%;
   height: 268px;
-  background: ${colors.secondary};
+  border-radius: 14px;
   overflow: hidden;
+  background-color: #f3f3f2;
+  margin-bottom: 14px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(18, 20, 23, 0.5) 2.5%,
+      rgba(18, 20, 23, 0) 41.07%
+    );
+  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: relative;
+    z-index: -1;
   }
 `;
 
 export const FavoriteButton = styled.button`
   position: absolute;
-  top: ${spacing.md};
-  right: ${spacing.md};
-  background: rgba(255, 255, 255, 0.9);
+  top: 14px;
+  right: 14px;
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: ${transitions.fast};
   z-index: 2;
 
-  &:hover {
-    background: white;
-    transform: scale(1.05);
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: ${(props) => (props.$isFavorite ? "#3470FF" : "none")};
+    stroke: ${(props) =>
+      props.$isFavorite ? "#3470FF" : "rgba(255, 255, 255, 0.8)"};
+    transition: all 0.2s ease;
   }
 
-  img {
-    width: 24px;
-    height: 24px;
-    filter: ${(props) =>
-      props.$isFavorite
-        ? "brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)"
-        : "none"};
-    transition: ${transitions.fast};
+  &:hover svg {
+    transform: scale(1.1);
   }
 `;
 
 export const CardContent = styled.div`
-  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: ${spacing.md};
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
 `;
 
 export const CarTitle = styled.h3`
-  font-size: 18px;
-  font-weight: ${fonts.weights.semibold};
-  color: ${colors.text};
   margin: 0;
-  line-height: 20px;
-  font-family: ${fonts.primary};
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  span {
+    color: #3470ff;
+  }
 `;
 
 export const CarPrice = styled.div`
-  font-size: 18px;
-  font-weight: ${fonts.weights.semibold};
-  color: ${colors.primary};
-  font-family: ${fonts.primary};
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417;
 `;
 
 export const CarDetails = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 16px;
+  gap: 4px 6px;
+  margin-bottom: 28px;
   font-size: 12px;
-  color: ${colors.textSecondary};
-  line-height: 16px;
+  color: rgba(18, 20, 23, 0.5);
+  line-height: 1.5;
+  max-height: 40px;
+  overflow: hidden;
 `;
 
 export const DetailItem = styled.span`
   &:not(:last-child)::after {
     content: "|";
-    margin-left: 8px;
-    color: ${colors.border};
+    margin-left: 6px;
+    color: rgba(18, 20, 23, 0.1);
   }
 `;
 
 export const LearnMoreButton = styled.button`
   width: 100%;
-  background: ${colors.primary};
+  background: #3470ff;
   color: white;
-  font-size: 16px;
-  font-weight: ${fonts.weights.medium};
-  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 50px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -130,8 +139,9 @@ export const LearnMoreButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: auto;
 
   &:hover {
-    background: ${colors.primaryHover};
+    background: #0b44cd;
   }
 `;

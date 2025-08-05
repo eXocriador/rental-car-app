@@ -9,6 +9,8 @@ import {
   FilterGroup,
   FilterLabel,
   FilterSelect,
+  MileageGroup,
+  MileageInputWrapper,
   FilterInput,
   SearchButton,
   ResetButton
@@ -100,40 +102,32 @@ const Filters = ({ onSearch, onReset }) => {
         </FilterGroup>
 
         <FilterGroup>
-          <FilterLabel htmlFor="mileageFrom">Mileage From</FilterLabel>
-          <FilterInput
-            id="mileageFrom"
-            name="mileageFrom"
-            type="number"
-            placeholder="0"
-            value={filters.mileageFrom}
-            onChange={handleInputChange}
-            min="0"
-          />
+          <FilterLabel>Mileage</FilterLabel>
+          <MileageGroup>
+            <MileageInputWrapper>
+              <label>From</label>
+              <FilterInput
+                name="mileageFrom"
+                type="number"
+                value={filters.mileageFrom}
+                onChange={handleInputChange}
+                min="0"
+              />
+            </MileageInputWrapper>
+            <MileageInputWrapper>
+              <label>To</label>
+              <FilterInput
+                name="mileageTo"
+                type="number"
+                value={filters.mileageTo}
+                onChange={handleInputChange}
+                min="0"
+              />
+            </MileageInputWrapper>
+          </MileageGroup>
         </FilterGroup>
 
-        <FilterGroup>
-          <FilterLabel htmlFor="mileageTo">Mileage To</FilterLabel>
-          <FilterInput
-            id="mileageTo"
-            name="mileageTo"
-            type="number"
-            placeholder="100000"
-            value={filters.mileageTo}
-            onChange={handleInputChange}
-            min="0"
-          />
-        </FilterGroup>
-
-        <FilterGroup>
-          <SearchButton type="submit">Search</SearchButton>
-        </FilterGroup>
-
-        <FilterGroup>
-          <ResetButton type="button" onClick={handleReset}>
-            Reset
-          </ResetButton>
-        </FilterGroup>
+        <SearchButton type="submit">Search</SearchButton>
       </FiltersForm>
     </FiltersContainer>
   );

@@ -17,7 +17,7 @@ export const colors = {
 
 export const fonts = {
   primary:
-    "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+    "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
   sizes: {
     xs: "0.75rem", // 12px
     sm: "0.875rem", // 14px

@@ -25,32 +25,23 @@ export const LoadMoreContainer = styled.div`
 `;
 
 export const LoadMoreButton = styled.button`
-  background: transparent;
-  color: ${(props) => props.theme.colors?.primary || "#3470ff"};
+  background: none;
+  border: none;
+  color: #3470ff;
   font-size: 16px;
-  font-weight: 600;
-  padding: 12px 51px;
-  border: 1px solid ${(props) => props.theme.colors?.primary || "#3470ff"};
-  border-radius: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.2s ease;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: ${(props) => props.theme.fonts?.primary || "Inter, sans-serif"};
-  height: 44px;
-  min-width: 156px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   &:hover {
-    background: ${(props) => props.theme.colors?.primary || "#3470ff"};
-    color: white;
+    color: #0b44cd;
   }
 
   &:disabled {
-    background: ${(props) => props.theme.colors?.textSecondary || "#8a8a89"};
-    border-color: ${(props) => props.theme.colors?.textSecondary || "#8a8a89"};
-    color: white;
+    color: #8a8a89;
     cursor: not-allowed;
+    text-decoration: none;
   }
 `;
 

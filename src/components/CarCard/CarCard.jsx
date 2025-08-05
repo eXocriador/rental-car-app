@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
-import HeartIcon from "../../assets/icons/heart-icon.svg";
 import {
   addFavorite,
   removeFavorite
@@ -21,6 +20,24 @@ import {
   DetailItem,
   LearnMoreButton
 } from "./CarCard.styled";
+
+// Heart icon as React component
+const HeartIcon = ({ isFavorite }) => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      fill={isFavorite ? "#3470FF" : "none"}
+      stroke={isFavorite ? "#3470FF" : "rgba(255, 255, 255, 0.8)"}
+      strokeWidth="1.5"
+    />
+  </svg>
+);
 
 const CarCard = ({ car }) => {
   const dispatch = useDispatch();
@@ -58,25 +75,26 @@ const CarCard = ({ car }) => {
           $isFavorite={isFavorite}
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
-          <img src={HeartIcon} alt="heart" />
+          <HeartIcon isFavorite={isFavorite} />
         </FavoriteButton>
       </CardImage>
 
       <CardContent>
         <CardHeader>
           <CarTitle>
-            {car.brand} {car.model}, {car.year}
+            {car.brand} <span>{car.model}</span>, {car.year}
           </CarTitle>
           <CarPrice>{formatPrice(car.rentalPrice)}</CarPrice>
         </CardHeader>
 
         <CarDetails>
-          <DetailItem>{car.address}</DetailItem>
+          <DetailItem>{car.address.split(",")[1]}</DetailItem>
+          <DetailItem>{car.address.split(",")[2]}</DetailItem>
           <DetailItem>{car.rentalCompany}</DetailItem>
           <DetailItem>{capitalizeFirst(car.type)}</DetailItem>
           <DetailItem>{car.model}</DetailItem>
-          <DetailItem>{car.id}</DetailItem>
-          <DetailItem>{car.functionalities?.join(", ")}</DetailItem>
+          <DetailItem>{car.mileage.toLocaleString("en-US")}</DetailItem>
+          <DetailItem>{car.functionalities[0]}</DetailItem>
         </CarDetails>
 
         <LearnMoreButton onClick={handleLearnMore}>Learn More</LearnMoreButton>

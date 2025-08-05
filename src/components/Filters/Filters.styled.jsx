@@ -18,10 +18,11 @@ export const FiltersTitle = styled.h2`
 `;
 
 export const FiltersForm = styled.form`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr auto;
-  gap: 20px;
-  align-items: end;
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 50px;
 `;
 
 export const FilterGroup = styled.div`
@@ -31,69 +32,93 @@ export const FilterGroup = styled.div`
 `;
 
 export const FilterLabel = styled.label`
-  font-size: ${fonts.sizes.sm};
-  font-weight: ${fonts.weights.medium};
-  color: ${colors.text};
+  font-size: 14px;
+  font-weight: 500;
+  color: #8a8a89;
 `;
 
 export const FilterSelect = styled.select`
-  padding: 12px 16px;
-  border: 1px solid ${colors.border};
-  border-radius: 12px;
-  font-size: 16px;
-  background: white;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  background: #f7f7fb;
   transition: border-color 0.2s ease;
   font-family: ${fonts.primary};
-  height: 44px;
+  height: 48px;
   cursor: pointer;
-  width: 100%;
+  width: 224px;
+  font-weight: 500;
 
   &:focus {
     outline: none;
-    border-color: ${colors.primary};
+  }
+`;
+
+export const MileageGroup = styled.div`
+  display: flex;
+`;
+
+export const MileageInputWrapper = styled.div`
+  position: relative;
+
+  input {
+    position: relative;
+    z-index: 1;
+  }
+
+  label {
+    position: absolute;
+    left: 24px;
+    top: 14px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #121417;
+    z-index: 0;
   }
 `;
 
 export const FilterInput = styled.input`
-  padding: 12px 16px;
-  border: 1px solid ${colors.border};
-  border-radius: 12px;
-  font-size: 16px;
-  background: white;
-  transition: border-color 0.2s ease;
-  font-family: ${fonts.primary};
-  height: 44px;
-  width: 100%;
+  padding: 14px 24px 14px 70px;
+  width: 160px;
+  height: 48px;
+  background: #f7f7fb;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+
+  &:first-of-type {
+    border-radius: 14px 0 0 14px;
+    border-right: 1px solid rgba(138, 138, 137, 0.2);
+  }
+  &:last-of-type {
+    border-radius: 0 14px 14px 0;
+  }
 
   &:focus {
     outline: none;
-    border-color: ${colors.primary};
-  }
-
-  &::placeholder {
-    color: ${colors.textSecondary};
   }
 `;
 
 export const SearchButton = styled.button`
-  background: ${colors.primary};
+  background: #3470ff;
   color: white;
-  font-size: 16px;
-  font-weight: ${fonts.weights.medium};
-  padding: 12px 51px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 44px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   font-family: ${fonts.primary};
-  height: 44px;
-  min-width: 156px;
+  height: 48px;
+  min-width: 136px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    background: ${colors.primaryHover};
+    background: #0b44cd;
   }
 
   &:disabled {
